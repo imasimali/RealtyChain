@@ -7,22 +7,22 @@ const FooterContainer = () => {
       <Footer.Container>
         <Footer.Content>
           <Footer.Item>
-            <Footer.Title>Real Home</Footer.Title>
+            <Footer.Title>Block Yards</Footer.Title>
             <Footer.Text>
-              1337 Tengecha Road,Nairobi.Imarisha Tower, Second Floor, Room 135
+              FCC Road, Lahore. Punjab, Pakistan, 54000
             </Footer.Text>
             <Footer.List>
               <Footer.ListItem>
                 <Footer.Icon name="fas fa-phone-alt" social="true" />
-                <Footer.Text>+254720843306</Footer.Text>
+                <Footer.Text>+92 111 222 333</Footer.Text>
               </Footer.ListItem>
               <Footer.ListItem>
                 <Footer.Icon name="fab fa-whatsapp" social="true" />
-                <Footer.Text>+254720843306</Footer.Text>
+                <Footer.Text>+92 111 222 333</Footer.Text>
               </Footer.ListItem>
               <Footer.ListItem>
                 <Footer.Icon name="far fa-envelope" social="true" />
-                <Footer.Text>realhome@gmail.com</Footer.Text>
+                <Footer.Text>blockyards@gmail.com</Footer.Text>
               </Footer.ListItem>
             </Footer.List>
           </Footer.Item>
@@ -36,10 +36,10 @@ const FooterContainer = () => {
                 <Footer.Anchor to="/listing">Properties</Footer.Anchor>
               </Footer.ListItem>
               <Footer.ListItem>
-                <Footer.Anchor to="/agents">Agents</Footer.Anchor>
+                <Footer.Anchor to="/agents">Blockchain</Footer.Anchor>
               </Footer.ListItem>
               <Footer.ListItem>
-                <Footer.Anchor to="/faqs">FAQs</Footer.Anchor>
+                <Footer.Anchor to="/prediction">Predictions</Footer.Anchor>
               </Footer.ListItem>
               <Footer.ListItem>
                 <Footer.Anchor to="/dashboard">Account</Footer.Anchor>
@@ -99,7 +99,7 @@ const FooterContainer = () => {
       </Footer.Container>
       <Footer.Bottom>
         <Footer.Container>
-          <Footer.Text>&copy; Real Home. All Rights Reserved</Footer.Text>
+          <Footer.Text>&copy; Block Yards. All Rights Reserved</Footer.Text>
         </Footer.Container>
       </Footer.Bottom>
     </Footer>

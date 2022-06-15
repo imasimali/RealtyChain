@@ -19,6 +19,8 @@ const Listing = () => {
   useEffect(() => {
     dispatch(getPropertyList());
   }, [dispatch]);
+
+  console.log(properties)
   return (
     <>
       <HeaderContainer bg="false" />

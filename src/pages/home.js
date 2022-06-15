@@ -23,8 +23,8 @@ const Home = ({
     <>
       <HeaderContainer bg="true" source="/images/banners/banner4.jpg" />
       <FeaturedListingContainer />
-      <FeaturedAgentsContainer />
-      <HomeContactContainer />
+      {/*<FeaturedAgentsContainer />*/}
+      {/*<HomeContactContainer />*/}
       <FooterContainer />
     </>
   );

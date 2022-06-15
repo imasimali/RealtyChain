@@ -38,6 +38,10 @@ const App = () => {
         <Route exact path="/all-listing" component={AdminListingList} />
         <Route exact path="/all-agents" component={AdminAgentsList} />
         <Route exact path="/mylisting" component={AgentListing} />
+        <Route exact path="/prediction" component={() => { 
+             window.location.href = 'https://yardblocksapi.whizz-kid.repl.co'; 
+             return null;
+        }}/>
       </Switch>
     </Router>
   );

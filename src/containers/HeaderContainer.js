@@ -75,9 +75,9 @@ const HeaderContainer = ({ bg, source, user }) => {
               We have implemented the blockchain on real estate industry.
             </Jumbotron.Text>
           </Jumbotron.Left>
-          <Jumbotron.Right>
+          {/*<Jumbotron.Right>
             <AdvancedSearchContainer />
-          </Jumbotron.Right>
+          </Jumbotron.Right>*/}
         </Jumbotron>
       )}
       <SideNavigationContainer

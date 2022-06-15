@@ -12,6 +12,10 @@ const links = [
     to: "/agents",
   },
   {
+    name: "prediction",
+    to: "/prediction",
+  },
+  {
     name: "login",
     to: "/login",
   },

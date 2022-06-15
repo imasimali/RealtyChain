@@ -58,7 +58,7 @@ export const RangeInput = styled.input`
 export const SubmitInput = styled.input.attrs({
   type: "submit",
 })`
-  width: 50%;
+  width: 100%;
   display: block;
   outline: none;
   border-radius: 2px;

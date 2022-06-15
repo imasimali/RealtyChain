@@ -16,14 +16,18 @@ const ContactAgentContainer = ({ property }) => {
           <Property.ContactList>
             <Property.ListItem>
               <Property.Icon name="fas fa-phone-alt"></Property.Icon>
-              <Property.Text>+254720843306</Property.Text>
+              <Property.Text>+92 111 222 333</Property.Text>
             </Property.ListItem>
           </Property.ContactList>
         </Property.ContactItem>
       </Property.ContactHeader>
+      
       <Property.ContactContent>
         <Property.ContactContainer>
-          <Form>
+          <Form.FormGroup>
+            <Form.SubmitInput type="submit" value="Buy Now" />
+          </Form.FormGroup>
+          {/*<Form>
             <Form.FormGroup>
               <Form.Input type="text" placeholder="Name" />
             </Form.FormGroup>
@@ -45,7 +49,7 @@ const ContactAgentContainer = ({ property }) => {
             <Form.FormGroup>
               <Form.SubmitInput type="submit" value="Send Message" />
             </Form.FormGroup>
-          </Form>
+          </Form>*/}
         </Property.ContactContainer>
       </Property.ContactContent>
     </Property.Contact>

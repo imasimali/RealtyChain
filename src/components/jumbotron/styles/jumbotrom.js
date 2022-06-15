@@ -19,7 +19,8 @@ export const Left = styled.div`
   align-items: center;
   text-align: center;
   padding: 20px;
-  width: 65%;
+  width: 100%;
+  height: 75vh;
   @media only screen and (max-width: 768px) {
     width: 100%;
     margin-top: 60px;
