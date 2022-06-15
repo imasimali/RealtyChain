@@ -8,7 +8,7 @@ const links = [
     to: "/listing",
   },
   {
-    name: "Agents",
+    name: "Blockchain",
     to: "/agents",
   },
   {

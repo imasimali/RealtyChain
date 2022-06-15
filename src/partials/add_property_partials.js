@@ -42,7 +42,6 @@ const Descrition = () => {
               <Form.Option disabled defaultValue>
                 None
               </Form.Option>
-              <Form.Option>Rental</Form.Option>
               <Form.Option>Sales</Form.Option>
             </Form.Select>
           </Form.FormGroup>

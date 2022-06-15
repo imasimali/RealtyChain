@@ -13,13 +13,13 @@ const Forgott = () => {
               <Forgot.Title>Reset Your Password</Forgot.Title>
             </Forgot.Header>
             <Forgot.InnerContent>
-              <Form>
+              <Form onSubmit={(e) => { e.preventDefault() }}>
                 <Form.FormGroup>
                   <Form.Label>Email</Form.Label>
                   <Form.Input type="text" />
                 </Form.FormGroup>
                 <Form.FormGroup>
-                  <Form.SubmitInput type="submit" value="Send Reset Token" />
+                  <Form.SubmitInput value="Send Reset Token" />
                 </Form.FormGroup>
               </Form>
             </Forgot.InnerContent>

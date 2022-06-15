@@ -6,8 +6,19 @@ import {
   HomeContactContainer,
   FooterContainer,
 } from "../containers";
+import { useEffect, useState } from "react";
+import firebase from "firebase";
+import withFirebaseAuth from "react-with-firebase-auth";
+import firebaseConfig from "../firebaseConfig";
 
-const Home = () => {
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+const Home = ({
+  user
+}) => {
+  console.log(user)
   return (
     <>
       <HeaderContainer bg="true" source="/images/banners/banner4.jpg" />
@@ -19,4 +30,8 @@ const Home = () => {
   );
 };
 
-export default Home;
+// export default Home;
+
+const firebaseAppAuth = firebaseApp.auth();
+
+export default withFirebaseAuth({ firebaseAppAuth })(Home);

@@ -49,7 +49,7 @@ export const adminurls = [
     subUrl: false,
   },
   {
-    url: "#",
+    url: "leaving",
     name: "Logout",
     icon: "fas fa-sign-out-alt",
     subUrl: false,

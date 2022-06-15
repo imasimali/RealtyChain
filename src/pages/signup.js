@@ -1,8 +1,44 @@
 import React, { Fragment } from "react";
+import { useEffect, useState } from "react";
 import { HeaderContainer, FooterContainer } from "../containers";
 import { Signup, Form } from "../components";
+import firebase from "firebase";
+import withFirebaseAuth from "react-with-firebase-auth";
+import firebaseConfig from "../firebaseConfig";
+import { useHistory } from 'react-router-dom';
 
-const Signupp = () => {
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+const Signupp = ({
+  user,
+  createUserWithEmailAndPassword,
+}) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
+
+  useEffect(() => {
+    checkUser(user);
+  }, []);
+
+  useEffect(() => {
+    checkUser(user);
+  }, [user]);
+
+  function checkUser(user) {
+    if (user != null) {
+      history.push("/dashboard");
+    }
+  }
+
+  function handleSubmit() {
+    createUserWithEmailAndPassword(email, password);
+    checkUser(user);
+    // console.log(user)
+  }
+
   return (
     <Fragment>
       <HeaderContainer bg="false" />
@@ -13,22 +49,18 @@ const Signupp = () => {
               <Signup.Title>Signup</Signup.Title>
             </Signup.Header>
             <Signup.InnerContent>
-              <Form>
+              <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
                 <Form.FormGroup>
                   <Form.Label>Name</Form.Label>
                   <Form.Input type="text" />
                 </Form.FormGroup>
                 <Form.FormGroup>
                   <Form.Label>Email</Form.Label>
-                  <Form.Input type="text" />
+                  <Form.Input onChange={(e) => setEmail(e.target.value)} type="text" />
                 </Form.FormGroup>
                 <Form.FormGroup>
                   <Form.Label>Password</Form.Label>
-                  <Form.Input type="text" />
-                </Form.FormGroup>
-                <Form.FormGroup>
-                  <Form.Label>Confirm Password</Form.Label>
-                  <Form.Input type="text" />
+                  <Form.Input onChange={(e) => setPassword(e.target.value)} type="text" />
                 </Form.FormGroup>
                 <Form.FormGroup>
                   <Form.SubmitInput type="submit" value="Signup" />
@@ -49,4 +81,8 @@ const Signupp = () => {
   );
 };
 
-export default Signupp;
+// export default Signupp;
+
+const firebaseAppAuth = firebaseApp.auth();
+
+export default withFirebaseAuth({ firebaseAppAuth })(Signupp);

@@ -81,7 +81,7 @@ const AdvancedSearchContainer = () => {
           <Form.FormGroup>
             <Form.Span>
               {" "}
-              Price range: Ksh {priceFormat(+priceRange)} to Ksh{" "}
+              Price range: PKR {priceFormat(+priceRange)} to PKR{" "}
               {priceFormat(maxPrice)}
             </Form.Span>
             <Form.RangeInput

