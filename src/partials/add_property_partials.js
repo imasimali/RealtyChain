@@ -149,7 +149,7 @@ const Media = (props) => {
                 storageRef.getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                   setDownloadurl(url);
                   functionHandler(downloadurl);
-                  // console.log(downloadurl);
+                  console.log(downloadurl);
                 });
             }
         );

@@ -1,5 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import firebase from "firebase";
+import withFirebaseAuth from "react-with-firebase-auth";
+import firebaseConfig from "../firebaseConfig";
 
 import { Section, Add, Form } from "../components";
 import { useParams } from "react-router-dom";
@@ -15,7 +18,13 @@ import {
   Details,
 } from "../partials/add_property_partials";
 
-const AddLisiting = () => {
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+const AddLisiting = ({
+  user
+}) => {
   const { id } = useParams();
   // console.log(id);
 
@@ -28,6 +37,8 @@ const AddLisiting = () => {
     const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`, {
       method: 'POST',
       body: JSON.stringify({
+        email: user?.email? user.email : "None",
+        waddress: "0x000000",
         images: childData,
         category: data.get("category"),
         price: data.get("price"),
@@ -89,4 +100,8 @@ const AddLisiting = () => {
   );
 };
 
-export default AddLisiting;
+// export default AddLisiting;
+
+const firebaseAppAuth = firebaseApp.auth();
+
+export default withFirebaseAuth({ firebaseAppAuth })(AddLisiting);

@@ -6,6 +6,13 @@ const price = (price) => {
   return price.format();
 };
 
+// const listing = async function(){
+//   const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
+//   const json = await res.json()
+//   console.log(json)
+//   return json
+// };
+
 const listing = [
   {
   "id": 347795,
@@ -24,7 +31,6 @@ const listing = [
        "location": "Model Town",
        "city": "Lahore",
        "province_name": "Punjab",
-       "locality": "Model Town, Lahore, Punjab",
        "latitude": 31.48386866,
        "longitude": 74.3256855,
        "area": "6 Kanal",
@@ -42,7 +48,7 @@ const listing = [
        "bedrooms": 5,
        "baths": 3,
        "area_sqft": 32670.12,
-       "corner": true,
+       "garage": true,
        "pool": true,
        "furnished": true,
    },
@@ -64,7 +70,6 @@ const listing = [
        "location": "Officers Colony",
        "city": "Lahore",
        "province_name": "Punjab",
-       "locality": "Officers Colony, Lahore, Punjab",
        "latitude": 32.48386866,
        "longitude": 75.3256855,
        "area": "4 Kanal",
@@ -82,7 +87,7 @@ const listing = [
        "bedrooms": 5,
        "baths": 3,
        "area_sqft": 32670.12,
-       "corner": true,
+       "garage": true,
        "pool": true,
        "furnished": true,
    },
@@ -104,7 +109,6 @@ const listing = [
        "location": "Askari 10",
        "city": "Lahore",
        "province_name": "Punjab",
-       "locality": "Askari 10, Lahore, Punjab",
        "latitude": 33.48386866,
        "longitude": 76.3256855,
        "area": "15 Kanal",
@@ -122,7 +126,7 @@ const listing = [
        "bedrooms": 8,
        "baths": 6,
        "area_sqft": 82670.12,
-       "corner": true,
+       "garage": true,
        "pool": true,
        "furnished": true,
    },
