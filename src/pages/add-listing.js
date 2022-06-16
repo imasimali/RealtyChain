@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 
 import { Section, Add, Form } from "../components";
 import { useParams } from "react-router-dom";
@@ -16,7 +17,43 @@ import {
 
 const AddLisiting = () => {
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
+
+  const [childData, setChildData] = useState("");
+
+  async function handleSubmit(event) {
+    const data = new FormData(event.currentTarget);
+    console.log(childData)
+
+    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`, {
+      method: 'POST',
+      body: JSON.stringify({
+        images: childData,
+        category: data.get("category"),
+        price: data.get("price"),
+        featured: data.get("featured") == "Yes" ? true : false,
+        date: data.get("date"),
+        description: data.get("description"),
+        location: data.get("location"),
+        city: data.get("city"),
+        state: data.get("state"),
+        latitude: data.get("latitude"),
+        longitude: data.get("longitude"),
+        beds: data.get("beds"),
+        baths: data.get("baths"),
+        areasqft: data.get("areasqft"),
+        areatext: data.get("areatext"),
+        garage: data.get("garage") == "Available" ? true : false,
+        pool: data.get("pool") == "Available" ? true : false,
+        furnished: data.get("furnished") == "Available" ? true : false,
+        status: data.get("status") == "Available" ? true : false,
+        amenities: data.get("amenities").split(','),
+      }),
+    })
+    const result = await res.json();
+    console.log(result)
+  }
+
   return (
     <>
       <HeaderContainer bg={false} />
@@ -24,10 +61,10 @@ const AddLisiting = () => {
         <Section.InnerContainer>
           <DashboardContainer title={id ? "Edit Property" : "Add Property"}>
             <Add>
-              <Form>
+              <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }}>
                 <Descrition />
                 <Location />
-                <Media />
+                <Media passChildData={setChildData}/>
                 <Details />
                 <Add.Footer>
                   <Form.FormGroup class="form-group">

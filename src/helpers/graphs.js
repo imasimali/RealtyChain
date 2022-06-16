@@ -3,11 +3,11 @@ import { Bar } from "react-chartjs-2";
 
 const BarGraph = ({ properties }) => {
   const categoryArray = [
-    ...new Set(properties.map((property) => property.category)),
+    ...new Set(properties.map((property) => property.type)),
   ];
   const count = Object.values(
     properties
-      .map((property) => property.category)
+      .map((property) => property.type)
       .reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {})
   );
 

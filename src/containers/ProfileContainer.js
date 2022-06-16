@@ -32,27 +32,27 @@ const ProfileContainer = () => {
           <Profile.BioTop>
             <Form.FormGroup>
               <Form.Label>Name</Form.Label>
-              <Form.Input type="text" value="Kevin Caster" />
+              <Form.Input type="text" value="Emad Zaheer" />
             </Form.FormGroup>
             <Form.FormGroup>
               <Form.Label>Email</Form.Label>
-              <Form.Input type="text" value="caster@gmail.com" />
+              <Form.Input type="text" value="emadzaheer@gmail.com" />
             </Form.FormGroup>
             <Form.FormGroup>
               <Form.Label>Phone</Form.Label>
-              <Form.Input type="text" value="+2547564867" />
+              <Form.Input type="text" value="+92 111 222 333" />
             </Form.FormGroup>
             <Form.FormGroup>
               <Form.Label>Address</Form.Label>
-              <Form.Input type="text" value="P.0 22344 Nairobi" />
+              <Form.Input type="text" value="St# 2 Old Officers Colony" />
             </Form.FormGroup>
             <Form.FormGroup>
-              <Form.Label>County</Form.Label>
-              <Form.Input type="text" value="Nairobi" />
+              <Form.Label>Town</Form.Label>
+              <Form.Input type="text" value="Lahore" />
             </Form.FormGroup>
             <Form.FormGroup>
-              <Form.Label>Town/Estate</Form.Label>
-              <Form.Input type="text" value="Westlands" />
+              <Form.Label>State</Form.Label>
+              <Form.Input type="text" value="Punjab" />
             </Form.FormGroup>
           </Profile.BioTop>
           <Profile.BioBottom>

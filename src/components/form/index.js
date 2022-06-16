@@ -11,6 +11,7 @@ import {
   RangeInput,
   TextArea,
   Span,
+  Checkbox,
 } from "./styles/form";
 
 const Form = ({ children, ...restProps }) => {
@@ -29,6 +30,10 @@ Form.TextArea = ({ children, ...restProps }) => {
   return <TextArea {...restProps}>{children}</TextArea>;
 };
 Form.Input = ({ children, ...restProps }) => {
+  return <Input {...restProps} />;
+};
+
+Form.Checkbox = ({ children, ...restProps }) => {
   return <Input {...restProps} />;
 };
 

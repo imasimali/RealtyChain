@@ -33,15 +33,15 @@ export const adminurls = [
       { url: "/all-listing", name: "All Listing", icon: "far fa-list-alt" },
     ],
   },
-  {
-    url: "#",
-    name: "Agents",
-    icon: "fas fa-users",
-    subUrl: true,
-    subUrls: [
-      { url: "/all-agents", name: "All Agents", icon: "far fa-list-alt" },
-    ],
-  },
+  // {
+  //   url: "#",
+  //   name: "Agents",
+  //   icon: "fas fa-users",
+  //   subUrl: true,
+  //   subUrls: [
+  //     { url: "/all-agents", name: "All Agents", icon: "far fa-list-alt" },
+  //   ],
+  // },
   {
     url: "change-password",
     name: "Change Password",

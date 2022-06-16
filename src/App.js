@@ -23,7 +23,6 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/agents" component={Agents} />
         <Route exact path="/listing" component={Listings} />
         <Route exact path="/agent/:id" component={Agentt} />
         <Route exact path="/property/:id" component={Listing} />
@@ -42,6 +41,10 @@ const App = () => {
              window.location.href = 'https://yardblocksapi.whizz-kid.repl.co'; 
              return null;
         }}/>
+        <Route exact path="/blockchain" component={() => { 
+             window.location.href = 'https://blockyardsbasic.whizz-kid.repl.co'; 
+             return null;
+        }} />
       </Switch>
     </Router>
   );

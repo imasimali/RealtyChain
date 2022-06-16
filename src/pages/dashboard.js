@@ -40,7 +40,7 @@ const Dashboard = () => {
               <Summary.Anchor to="/dashboard_agents" bg="var(--bs-pink)">
                 <Summary.AnchorDiv>
                   <Summary.Title>{agents.length}</Summary.Title>
-                  <Summary.Text>All Agents</Summary.Text>
+                  <Summary.Text>All Users</Summary.Text>
                 </Summary.AnchorDiv>
                 <Summary.AnchorDiv>
                   <Summary.Icon name="fas fa-users" />

@@ -26,6 +26,10 @@ export const Option = styled.option`
   padding: 16px;
 `;
 
+export const Checkbox = styled.input.attrs({ type: "checkbox" })`
+
+`;
+
 export const Input = styled.input.attrs({ type: "text" })`
   width: 100%;
   padding: 18px 9px;

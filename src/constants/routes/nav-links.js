@@ -9,7 +9,7 @@ const links = [
   },
   {
     name: "Blockchain",
-    to: "/agents",
+    to: "/blockchain",
   },
   {
     name: "prediction",
