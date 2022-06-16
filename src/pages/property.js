@@ -51,10 +51,10 @@ const Listing = () => {
         <Section.InnerContainer>
           <Property.Header>
             <Property.HeaderLeft>
-              <Property.Title>{property.title}</Property.Title>
+              <Property.Title>{property.type} For Sale - Property {property.id}</Property.Title>
               <Property.Location>
                 <Property.Icon name="fas fa-map-marker-alt"></Property.Icon>
-                <Property.Text>{property.location}</Property.Text>
+                <Property.Text>{property.address.locality}</Property.Text>
               </Property.Location>
             </Property.HeaderLeft>
             <Property.HeaderRight>

@@ -13,7 +13,7 @@ const AdvancedSearchContainer = () => {
   const { properties } = useSelector((state) => state.propertyList);
 
   const price = properties.map(
-    (property) => +property.price.split(",").join("")
+    (property) => +property.price
   );
 
   const maxPrice = Math.max.apply(null, price),

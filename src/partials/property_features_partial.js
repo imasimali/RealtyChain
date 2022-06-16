@@ -3,8 +3,8 @@ import { Property } from "../components";
 export const PropertGallery = ({ image }) => {
   return (
     <Property.Gallery>
-      <Property.ImageContainer>
-        <Property.Image source={image[0]} />
+        <Property.Image source={image} />
+      {/*<Property.ImageContainer>
       </Property.ImageContainer>
       <Property.ImageContainer>
         <Property.Image source={image[1]} />
@@ -14,7 +14,7 @@ export const PropertGallery = ({ image }) => {
       </Property.ImageContainer>
       <Property.ImageContainer>
         <Property.Image source={image[3]} />
-      </Property.ImageContainer>
+      </Property.ImageContainer>*/}
     </Property.Gallery>
   );
 };
@@ -41,8 +41,8 @@ export const PropertyFeatures = ({ features }) => {
             {features.bedrooms}
           </Property.Text>
           <Property.Text>
-            <Property.Span>Garage : </Property.Span>
-            {features.garage}
+            <Property.Span>Baths : </Property.Span>
+            {features.baths}
           </Property.Text>
         </Property.InfoItem>
 
@@ -52,14 +52,18 @@ export const PropertyFeatures = ({ features }) => {
             {features.status ? "Active" : "Not Active"}
           </Property.Text>
           <Property.Text>
-            <Property.Span>Elevator : </Property.Span>
-            {features.elevator ? "Yes" : "No"}
+            <Property.Span>Corner : </Property.Span>
+            {features.corner ? "Yes" : "No"}
           </Property.Text>
         </Property.InfoItem>
         <Property.InfoItem>
           <Property.Text>
-            <Property.Span>Kitchen : </Property.Span>
-            {features.kitchen ? "Availalbe" : "Not Available"}
+            <Property.Span>Furnished : </Property.Span>
+            {features.furnished ? "Yes" : "No"}
+          </Property.Text>
+          <Property.Text>
+            <Property.Span>Swimming Pool : </Property.Span>
+            {features.pool ? "Availalbe" : "Not Available"}
           </Property.Text>
         </Property.InfoItem>
       </Property.InfoContent>
@@ -110,22 +114,22 @@ export const PropertyAddress = ({ address }) => {
       <Property.InfoContent contentShown={addressShown}>
         <Property.InfoItem>
           <Property.Text>
-            <Property.Span>Address : </Property.Span>
-            {address.address}
+            <Property.Text>
+            <Property.Span>Street : </Property.Span>
+            {address.locality}
           </Property.Text>
-          <Property.Text>
-            <Property.Span>City : </Property.Span>
-            {address.city}
+            <Property.Span>Address : </Property.Span>
+            {address.location}
           </Property.Text>
         </Property.InfoItem>
         <Property.InfoItem>
           <Property.Text>
-            <Property.Span>County/Sub-County : </Property.Span>
-            {address.county}
+            <Property.Text>
+            <Property.Span>City : </Property.Span>
+            {address.city}
           </Property.Text>
-          <Property.Text>
-            <Property.Span>Street : </Property.Span>
-            {address.street}
+            <Property.Span>Province : </Property.Span>
+            {address.province_name}
           </Property.Text>
         </Property.InfoItem>
         <Property.InfoItem>

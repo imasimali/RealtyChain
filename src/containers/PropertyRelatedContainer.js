@@ -20,17 +20,17 @@ const FeaturedItem = ({ property }) => {
   return (
     <Property.FeaturedItem>
       <Property.ItemLeft>
-        <Property.Image source={property.images[1]} />
+        <Property.Image source={property.images} />
       </Property.ItemLeft>
       <Property.ItemRight>
         <Property.Subtitle>
           <Property.Anchor to={`/property/${property.id}`}>
-            {property.title}
+            {property.type} - {property.id}
           </Property.Anchor>
         </Property.Subtitle>
         <Property.Text>
           <Property.Icon name="fas fa-map-marker-alt"></Property.Icon>{" "}
-          {property.address.address}
+          {property.address.location}
         </Property.Text>
         <Property.FeaturedInfo>
           <Property.Text>

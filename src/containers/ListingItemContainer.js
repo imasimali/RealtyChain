@@ -8,20 +8,20 @@ const ListingItemContainer = ({ featured, width }) => {
     <Listing width={width}>
       <Listing.Top>
         <Listing.TopItem>
-          <Listing.Image source={featured.images[0]} />
-          <Listing.TopItemContainer>
+          <Listing.Image source={featured.images} />
+          {/*<Listing.TopItemContainer>
             <Listing.TopItemInfo>
               <Listing.Icon></Listing.Icon>
-              <Listing.Text location>{featured.location}</Listing.Text>
+              <Listing.Text location>{featured.address.locality}</Listing.Text>
             </Listing.TopItemInfo>
-          </Listing.TopItemContainer>
+          </Listing.TopItemContainer>*/}
         </Listing.TopItem>
       </Listing.Top>
       <Listing.Bottom>
         <Listing.BottomItem>
           <Listing.Title>
             <Listing.Anchor to={`/property/${featured.id}`}>
-              {featured.title}
+              {featured.type} - {featured.id}
             </Listing.Anchor>
           </Listing.Title>
           <Listing.Price>PKR {featured.price}</Listing.Price>
@@ -36,13 +36,13 @@ const ListingItemContainer = ({ featured, width }) => {
           <Listing.AgentContainer>
             <Listing.AgentImageContainer>
               <Listing.Image
-                src={`/images/agents/${featured.agent.image}`}
+                src={`/images/agents/default.jpg`/*${featured.agent.image}*/}
                 profile="true"
               />
             </Listing.AgentImageContainer>
             <Listing.AgentName>
-              <Listing.Anchor to={`/agents/${featured.agent.name}`}>
-                {featured.agent.name}
+              <Listing.Anchor to={`/agents/default.jpg`/*${featured.agent.name}*/}>
+                {featured.owner.name}
               </Listing.Anchor>
             </Listing.AgentName>
           </Listing.AgentContainer>

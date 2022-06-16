@@ -7,12 +7,13 @@ const ContactAgentContainer = ({ property }) => {
         <Property.ContactItem>
           <Property.AgentImage
             source={
-              property.agent.image ? property.agent.image : property.agent.photo
+              /*property.agent.image ? property.agent.image : property.agent.photo*/
+              `default.jpg`
             }
           />
         </Property.ContactItem>
         <Property.ContactItem>
-          <Property.Subtitle>{property.agent.name}</Property.Subtitle>
+          <Property.Subtitle>{property.owner? property.owner.name : "Loading"}</Property.Subtitle>
           <Property.ContactList>
             <Property.ListItem>
               <Property.Icon name="fas fa-phone-alt"></Property.Icon>
