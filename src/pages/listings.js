@@ -12,6 +12,7 @@ import { Section } from "../components";
 const Listing = () => {
   const [properties, setProperties] = useState([])
   const [isLoading, setIsLoading] = useState(true);
+  const [childData, setChildData] = useState([]);
 
   const requestlistings = async function() {
     const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
@@ -25,6 +26,10 @@ const Listing = () => {
     setIsLoading(false);
   }, []);
 
+  useEffect(() => {
+    setProperties(childData);
+  }, [childData]);
+
   console.log(properties)
   return (
     <>
@@ -34,7 +39,7 @@ const Listing = () => {
           <Section.Flex>
             <Section.FlexItem width="30%" relative flexStart>
               <Section.Shadow>
-                <AdvancedSearchContainer />
+                <AdvancedSearchContainer passChildData={setChildData} />
               </Section.Shadow>
             </Section.FlexItem>
             <Section.FlexItem width="65%">

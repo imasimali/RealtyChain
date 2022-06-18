@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 
-import { getPropertyList } from "../redux/actions/propertiesAction";
+// import { getPropertyList } from "../redux/actions/propertiesAction";
 
 import { FormWrapper, Form } from "../components";
 
 import { priceFormat } from "../helpers/helper_functions";
 
-const AdvancedSearchContainer = () => {
+const AdvancedSearchContainer = (props) => {
   const [priceRange, setPriceRange] = useState(0);
-  const [properties, setProperties] = useState([])
-  const [isLoading, setIsLoading] = useState(true);
+  const [properties, setProperties] = useState([]);
 
   const requestlistings = async function() {
     const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
@@ -21,12 +20,9 @@ const AdvancedSearchContainer = () => {
   useEffect(async () => {
     const res = await requestlistings();
     setProperties(res);
-    setIsLoading(false);
   }, []);
 
-  const setField = function(){
-    
-  }
+
   const price = properties.map(
     (property) => +property.price
   );
@@ -55,41 +51,24 @@ const AdvancedSearchContainer = () => {
   ].sort((a, b) => a - b);
 
   async function handleSubmit(event) {
-    // const data = new FormData(event.currentTarget);
-    // console.log(childData)
+    const data = new FormData(event.currentTarget);
 
-    // const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`, {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     email: user?.email? user.email : "None",
-    //     waddress: "0x000000",
-    //     images: childData,
-    //     category: data.get("category"),
-    //     price: data.get("price"),
-    //     featured: data.get("featured") == "Yes" ? true : false,
-    //     date: data.get("date"),
-    //     description: data.get("description"),
-    //     location: data.get("location"),
-    //     city: data.get("city"),
-    //     state: data.get("state"),
-    //     latitude: data.get("latitude"),
-    //     longitude: data.get("longitude"),
-    //     beds: data.get("beds"),
-    //     baths: data.get("baths"),
-    //     areasqft: data.get("areasqft"),
-    //     areatext: data.get("areatext"),
-    //     garage: data.get("garage") == "Available" ? true : false,
-    //     pool: data.get("pool") == "Available" ? true : false,
-    //     furnished: data.get("furnished") == "Available" ? true : false,
-    //     status: data.get("status") == "Available" ? true : false,
-    //     amenities: data.get("amenities").split(','),
-    //   }),
-    // })
-    // const result = await res.json();
-    console.log("clicked")
+    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/search`, {
+      method: 'POST',
+      body: JSON.stringify({
+        type: data.get("type"),
+        location: data.get("location"),
+        area: data.get("area"),
+        beds: data.get("beds"),
+        baths: data.get("baths"),
+        searchfield: data.get("searchfield"),
+        price: priceRange,
+      }),
+    })
+    const resulting = await res.json();
+    resulting.result.length != 0 ? props.passChildData(resulting.result) : null
+    console.log(resulting.result)
   }
-
-
   
   return (
     <FormWrapper>
@@ -99,7 +78,7 @@ const AdvancedSearchContainer = () => {
       <FormWrapper.Content>
         <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }}>
           <Form.FormGroup>
-            <Form.Select>
+            <Form.Select name="type" required>
               <Form.Option defaultValue>Property Type</Form.Option>
               {categories.map((category) => (
                 <Form.Option key={category}>{category}</Form.Option>
@@ -107,7 +86,7 @@ const AdvancedSearchContainer = () => {
             </Form.Select>
           </Form.FormGroup>
           <Form.FormGroup>
-            <Form.Select>
+            <Form.Select name="location" required>
               <Form.Option defaultValue>Location</Form.Option>
               {locations.map((state) => (
                 <Form.Option key={state}>{state}</Form.Option>
@@ -115,26 +94,26 @@ const AdvancedSearchContainer = () => {
             </Form.Select>
           </Form.FormGroup>
           <Form.FormGroup>
-            <Form.Select>
+            <Form.Select name="area">
               <Form.Option defaultValue>Area (Marla or Kanal)</Form.Option>
               {area.map((area) => (
-                <Form.Option key={Math.random(area)}>{area}</Form.Option>
+                <Form.Option key={Math.random(area)} value={area}>{area}</Form.Option>
               ))}
             </Form.Select>
           </Form.FormGroup>
           <Form.FormGroup>
-            <Form.Select>
+            <Form.Select name="beds">
               <Form.Option defaultValue>Bed Rooms</Form.Option>
               {rooms.map((room) => (
-                <Form.Option key={Math.random(room)}>{room} Bedrooms</Form.Option>
+                <Form.Option key={Math.random(room)} value={room}>{room} Bedrooms</Form.Option>
               ))}
             </Form.Select>
           </Form.FormGroup>
           <Form.FormGroup>
-            <Form.Select>
+            <Form.Select name="baths">
               <Form.Option defaultValue>Bath Rooms</Form.Option>
               {baths.map((room) => (
-                <Form.Option key={Math.random(room)}>{room} Bathrooms</Form.Option>
+                <Form.Option key={Math.random(room)} value={room}>{room} Bathrooms</Form.Option>
               ))}
             </Form.Select>
           </Form.FormGroup>
@@ -154,7 +133,7 @@ const AdvancedSearchContainer = () => {
             />
           </Form.FormGroup>
           <Form.FormGroup>
-            <Form.Input type="text" placeholder="Search Term" />
+            <Form.Input type="text" name="searchfield" placeholder="Search Term" />
           </Form.FormGroup>
           <Form.FormGroup>
             <Form.SubmitInput type="submit" value="Search" />
