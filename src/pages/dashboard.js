@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   HeaderContainer,
   DashboardContainer,
@@ -6,29 +6,35 @@ import {
 } from "../containers";
 import { Section, Summary } from "../components";
 import BarGraph from "../helpers/graphs";
-import { getPropertyList } from "../redux/actions/propertiesAction";
-import { getAgentList } from "../redux/actions/agentsAction";
-import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
 
-  const { properties } = useSelector((state) => state.propertyList);
+  const [isLoading, setIsLoading] = useState(true);
+  const [properties, setProperties] = useState([])
 
-  const { agents } = useSelector((state) => state.agentList);
+  const requestfeatured = async function() {
+    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
+    const json = await res.json()
+    return json
+  };
 
-  useEffect(() => {
-    dispatch(getAgentList());
-    dispatch(getPropertyList());
-  }, [dispatch]);
+  useEffect(async () => {
+    const res = await requestfeatured()
+    setProperties(res);
+    setIsLoading(false);
+  }, []);
+
+
   return (
     <>
       <HeaderContainer />
       <Section bgColor="--bs-fade-info">
         <Section.InnerContainer>
-          <DashboardContainer title="Agency Summaries">
+          {isLoading ? (
+            <h3>Loading ...</h3>
+          ) : (<DashboardContainer title="Agency Summaries">
             <Summary.Top>
-              <Summary.Anchor to="/dashboard_properties" bg="var(--bs-teal)">
+              <Summary.Anchor to="" bg="var(--bs-teal)">
                 <Summary.AnchorDiv>
                   <Summary.Title>{properties.length}</Summary.Title>
                   <Summary.Text>All Properties</Summary.Text>
@@ -37,9 +43,9 @@ const Dashboard = () => {
                   <Summary.Icon name="fas fa-map-marker-alt" />
                 </Summary.AnchorDiv>
               </Summary.Anchor>
-              <Summary.Anchor to="/dashboard_agents" bg="var(--bs-pink)">
+              <Summary.Anchor to="" bg="var(--bs-pink)">
                 <Summary.AnchorDiv>
-                  <Summary.Title>{agents.length}</Summary.Title>
+                  <Summary.Title>4</Summary.Title>
                   <Summary.Text>All Users</Summary.Text>
                 </Summary.AnchorDiv>
                 <Summary.AnchorDiv>
@@ -55,7 +61,7 @@ const Dashboard = () => {
                 <BarGraph properties={properties} />
               </Summary.BottomContent>
             </Summary.Bottom>
-          </DashboardContainer>
+          </DashboardContainer>)}
         </Section.InnerContainer>
       </Section>
       <FooterContainer />

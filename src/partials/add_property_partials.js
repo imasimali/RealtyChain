@@ -116,7 +116,6 @@ const Media = (props) => {
   // const hiddenFileInput = useRef(null);
   const [file, setFile] = useState("");
   const [percent, setPercent] = useState(0);
-  const [downloadurl, setDownloadurl] = useState("");
 
   const functionHandler = (data) => {
     props.passChildData(data);
@@ -147,9 +146,8 @@ const Media = (props) => {
             () => {
                 // download url
                 storageRef.getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                  setDownloadurl(url);
-                  functionHandler(downloadurl);
-                  console.log(downloadurl);
+                  functionHandler(url);
+                  console.log(url);
                 });
             }
         );

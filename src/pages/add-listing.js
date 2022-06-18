@@ -18,6 +18,9 @@ import {
   Details,
 } from "../partials/add_property_partials";
 
+import Web3 from 'web3';
+import Blockyards from '../abis/Blockyards.json';
+
 const firebaseApp = !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)
   : firebase.app();
@@ -26,19 +29,69 @@ const AddLisiting = ({
   user
 }) => {
   const { id } = useParams();
-  // console.log(id);
-
   const [childData, setChildData] = useState("");
+  const [newpropertyid, setNewpropertyid] = useState("");
+
+  const [Account, setAccount] = useState("");
+  const [Contract, setContract] = useState("");
+  const [loading, isLoading] = useState(true);
+
+  useEffect(async () => {
+    await loadWeb3()
+    await loadBlockchainData()
+  }, []);
+
+  const loadWeb3 = async function() {
+    if(window.ethereum) {
+      window.web3 = new Web3(window.ethereum);
+      await window.ethereum.enable()
+    }
+    else if(window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider);
+    }
+    else {
+      window.alert('Non-ethereum browser detected')
+    }
+  }
+
+  const loadBlockchainData = async function() {
+    const web3 = window.web3
+    const accounts = await web3.eth.getAccounts()
+    const account = accounts[0]
+    setAccount(account)
+    console.log(accounts[0])
+    // Load contract
+    const networkId = await web3.eth.net.getId()
+    const networkData = Blockyards.networks[networkId]
+    if(networkData) {
+      const BlockyardsContract = new web3.eth.Contract(Blockyards.abi, networkData.address)
+      setContract(BlockyardsContract)
+      console.log(BlockyardsContract)
+    } else {
+      window.alert('Blockyards not deployed to connected network');
+    }
+  }
+
+  const addLand = (_assetId, value, _metadata) => {
+    isLoading(true)
+    const _price = window.web3.utils.toWei(value.toString(), 'ether')
+    Contract.methods.listASSET(_assetId, _price, _metadata).send({ from: Account })
+    .once('receipt', (receipt) => {
+      isLoading(false)
+    })
+  }
+
+  
 
   async function handleSubmit(event) {
     const data = new FormData(event.currentTarget);
-    console.log(childData)
+    // console.log(childData)
 
     const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`, {
       method: 'POST',
       body: JSON.stringify({
-        email: user?.email? user.email : "None",
-        waddress: "0x000000",
+        email: user?.email ? user.email : "None",
+        waddress: Account,
         images: childData,
         category: data.get("category"),
         price: data.get("price"),
@@ -61,8 +114,11 @@ const AddLisiting = ({
         amenities: data.get("amenities").split(','),
       }),
     })
-    const result = await res.json();
-    console.log(result)
+    const resulting = await res.json();
+    setNewpropertyid(resulting.result);
+    console.log(resulting.result);
+    addLand(newpropertyid, data.get("price"), user.email);
+    event.target.reset();
   }
 
   return (
@@ -75,7 +131,7 @@ const AddLisiting = ({
               <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }}>
                 <Descrition />
                 <Location />
-                <Media passChildData={setChildData}/>
+                <Media passChildData={setChildData} />
                 <Details />
                 <Add.Footer>
                   <Form.FormGroup class="form-group">
