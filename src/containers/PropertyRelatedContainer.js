@@ -9,7 +9,7 @@ const PropertyRelatedContainer = ({ featured }) => {
       </Property.FeaturedHeader>
       <Property.FeaturedContent>
         {featured.map((property) => (
-          <FeaturedItem key={property.id} property={property} />
+          <FeaturedItem key={property._id} property={property} />
         ))}
       </Property.FeaturedContent>
     </Property.Featured>
@@ -24,8 +24,8 @@ const FeaturedItem = ({ property }) => {
       </Property.ItemLeft>
       <Property.ItemRight>
         <Property.Subtitle>
-          <Property.Anchor to={`/property/${property.id}`}>
-            {property.type} - {property.id}
+          <Property.Anchor to={`/property/${property._id}`}>
+            {property.type} for Sale
           </Property.Anchor>
         </Property.Subtitle>
         <Property.Text>
@@ -34,9 +34,9 @@ const FeaturedItem = ({ property }) => {
         </Property.Text>
         <Property.FeaturedInfo>
           <Property.Text>
-            {property.type === "rental" ? "Rent" : "Sale"}
+            PKR {property.price}{/*property.type === "rental" ? "Rent" : "Sale"*/}
           </Property.Text>
-          <Property.Text>PKR {property.price}</Property.Text>
+          <Property.Text></Property.Text>
         </Property.FeaturedInfo>
       </Property.ItemRight>
     </Property.FeaturedItem>

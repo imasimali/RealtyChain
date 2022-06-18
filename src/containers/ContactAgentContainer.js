@@ -16,8 +16,8 @@ const ContactAgentContainer = ({ property }) => {
           <Property.Subtitle>{property.owner? property.owner.name : "Loading"}</Property.Subtitle>
           <Property.ContactList>
             <Property.ListItem>
-              <Property.Icon name="fas fa-phone-alt"></Property.Icon>
-              <Property.Text>+92 111 222 333</Property.Text>
+              {/*<Property.Icon name="fas fa-phone-alt"></Property.Icon>*/}
+              <Property.Text>{property.owner? property.owner.metaid : "Loading"}</Property.Text>
             </Property.ListItem>
           </Property.ContactList>
         </Property.ContactItem>

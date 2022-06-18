@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import {
   HeaderContainer,
   ListingItemContainer,
@@ -7,18 +7,23 @@ import {
   FooterContainer,
 } from "../containers";
 import { Section } from "../components";
-import { getPropertyList } from "../redux/actions/propertiesAction";
+// import { getPropertyList } from "../redux/actions/propertiesAction";
 
 const Listing = () => {
-  const dispatch = useDispatch();
+  const [properties, setProperties] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
 
-  const listProperties = useSelector((state) => state.propertyList);
+  const requestlistings = async function() {
+    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
+    const json = await res.json()
+    return json
+  };
 
-  const { properties } = listProperties;
-
-  useEffect(() => {
-    dispatch(getPropertyList());
-  }, [dispatch]);
+  useEffect(async () => {
+    const res = await requestlistings();
+    setProperties(res);
+    setIsLoading(false);
+  }, []);
 
   console.log(properties)
   return (
@@ -34,15 +39,19 @@ const Listing = () => {
             </Section.FlexItem>
             <Section.FlexItem width="65%">
               <Section.Title>Our Property List</Section.Title>
-              <Section.Content>
-                {properties.map((featured) => (
-                  <ListingItemContainer
-                    key={featured.id}
-                    featured={featured}
-                    width="49%"
-                  />
-                ))}
-              </Section.Content>
+              {isLoading ? (
+                <h3>Loading ...</h3>
+              ) : (
+                  <Section.Content>
+                    {properties.map((featured) => (
+                      <ListingItemContainer
+                        key={featured._id}
+                        featured={featured}
+                        width="49%"
+                      />
+                    ))}
+                  </Section.Content>
+                )}
               <Section.Footer>
                 <Section.Button>More Listing</Section.Button>
               </Section.Footer>

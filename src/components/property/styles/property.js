@@ -229,7 +229,7 @@ export const ContactContainer = styled.div``;
 export const Subtitle = styled.div`
   color: var(--bs-white);
   font-size: 1.2rem;
-  text-transform: capitalize;
+/*   text-transform: capitalize; */
 `;
 
 export const AgentImage = styled.img`
@@ -289,7 +289,7 @@ export const ItemRight = styled.div`
   margin-left: 16px;
   ${Subtitle} {
     font-size: 1.1rem;
-    text-transform: capitalize;
+/*     text-transform: capitalize; */
     margin-bottom: 8px;
     font-weight: bold;
 

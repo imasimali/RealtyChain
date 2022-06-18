@@ -3,6 +3,7 @@ import React from "react";
 import { Listing } from "../components";
 
 const ListingItemContainer = ({ featured, width }) => {
+  // console.log(featured)
   
   return (
     <Listing width={width}>
@@ -20,8 +21,8 @@ const ListingItemContainer = ({ featured, width }) => {
       <Listing.Bottom>
         <Listing.BottomItem>
           <Listing.Title>
-            <Listing.Anchor to={`/property/${featured.id}`}>
-              {featured.type} - {featured.id}
+            <Listing.Anchor to={`/property/${featured._id}`}>
+              {featured.type} For Sale
             </Listing.Anchor>
           </Listing.Title>
           <Listing.Price>PKR {featured.price}</Listing.Price>
@@ -29,7 +30,7 @@ const ListingItemContainer = ({ featured, width }) => {
             {featured.description.substring(0, 100)}
           </Listing.Text>
           <Listing.Button>
-            <Listing.Anchor to={`/property/${featured.id}`}>
+            <Listing.Anchor to={`/property/${featured._id}`}>
               Details
             </Listing.Anchor>
           </Listing.Button>

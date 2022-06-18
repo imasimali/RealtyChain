@@ -38,7 +38,7 @@ export const PropertyFeatures = ({ features }) => {
         <Property.InfoItem>
           <Property.Text>
             <Property.Span>Bedrooms : </Property.Span>
-            {features.bedrooms}
+            {features.beds}
           </Property.Text>
           <Property.Text>
             <Property.Span>Baths : </Property.Span>
@@ -116,7 +116,7 @@ export const PropertyAddress = ({ address }) => {
           <Property.Text>
             <Property.Text>
             <Property.Span>Street : </Property.Span>
-            {address.locality}
+            {address.location}
           </Property.Text>
             <Property.Span>Address : </Property.Span>
             {address.location}
@@ -129,13 +129,13 @@ export const PropertyAddress = ({ address }) => {
             {address.city}
           </Property.Text>
             <Property.Span>Province : </Property.Span>
-            {address.province_name}
+            {address.state}
           </Property.Text>
         </Property.InfoItem>
         <Property.InfoItem>
           <Property.Text>
             <Property.Span>Area : </Property.Span>
-            {address.area}
+            {address.areatext}
           </Property.Text>
         </Property.InfoItem>
       </Property.InfoContent>

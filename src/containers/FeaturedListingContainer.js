@@ -1,19 +1,26 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import { Section } from "../components";
 import { ListingItemContainer } from "./index";
-import { getFeaturedList } from "../redux/actions/propertiesAction";
+// import { getFeaturedList } from "../redux/actions/propertiesAction";
 
 const FeaturedListingContainer = () => {
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+  const [featuredProperties, setfeaturedProperties] = useState([])
 
-  const featuredList = useSelector((state) => state.featuredProperty);
+  const requestfeatured = async function() {
+    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
+    const json = await res.json()
+    return json
+  };
 
-  const { featured: featuredProperties } = featuredList;
+  useEffect(async () => {
+    const res = await requestfeatured()
+    setfeaturedProperties(res);
+    setIsLoading(false);
+  }, []);
 
-  useEffect(() => {
-    dispatch(getFeaturedList());
-  }, [dispatch]);
+  // console.log(featuredProperties)
 
   return (
     <Section bgColor="--bs-light">
@@ -21,11 +28,15 @@ const FeaturedListingContainer = () => {
         <Section.Header>
           <Section.Title>Our Featured Listing</Section.Title>
         </Section.Header>
-        <Section.Content>
-          {featuredProperties.map((featured) => (
-            <ListingItemContainer key={featured.id} featured={featured} />
-          ))}
-        </Section.Content>
+        {isLoading ? (
+          <h3>Loading ...</h3>
+        ) : (
+            <Section.Content>
+              {featuredProperties.map((featured) => (
+                <ListingItemContainer key={featured._id} featured={featured} />
+              ))}
+            </Section.Content>
+          )}
         <Section.Footer>
           <Section.Button>More Listing</Section.Button>
         </Section.Footer>
