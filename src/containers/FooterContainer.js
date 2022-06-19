@@ -7,7 +7,7 @@ const FooterContainer = () => {
       <Footer.Container>
         <Footer.Content>
           <Footer.Item>
-            <Footer.Title>Blockyards</Footer.Title>
+            <Footer.Title><img src="logo-white.png" width="85" height="70" /></Footer.Title>
             <Footer.Text>
               FCC Road, Lahore. Punjab, Pakistan, 54000
             </Footer.Text>

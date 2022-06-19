@@ -37,7 +37,7 @@ const HeaderContainer = ({ bg, source, user }) => {
         <HeaderWrapper.Container>
           <HeaderWrapper.Title bg={bg}>
             <HeaderWrapper.Link bg={bg} fixed={fixed} to="/">
-              Blockyards
+              {(bg === "true" && fixed) ? <img src="logo-blue.png" width="85" height="70" /> : bg === "true" ? <img src="logo-white.png" width="85" height="70" /> : <img src="logo-blue.png" width="85" height="70" />}
             </HeaderWrapper.Link>
           </HeaderWrapper.Title>
           <HeaderWrapper.LinksContainer>
@@ -45,7 +45,7 @@ const HeaderContainer = ({ bg, source, user }) => {
               {links.map((link) => (
                 <HeaderWrapper.Item key={link.to}>
                   <HeaderWrapper.Anchor bg={bg} fixed={fixed} to={`${link.to}`}>
-                    { !(link.name == "login") ? link.name : ( user != null ? link.name = "dashboard" : link.name = "login" ) }
+                    {!(link.name == "login") ? link.name : (user != null ? link.name = "dashboard" : link.name = "login")}
                   </HeaderWrapper.Anchor>
                 </HeaderWrapper.Item>
               ))}
