@@ -39,20 +39,24 @@ const AddLisiting = ({
   const [loading, isLoading] = useState(true);
 
   useEffect(async () => {
-    await loadWeb3()
-    await loadBlockchainData()
+    const isweb3 = await loadWeb3()
+    isweb3 ? await loadBlockchainData() : null
   }, []);
 
   const loadWeb3 = async function() {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
       await window.ethereum.enable()
+      return true
     }
     else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider);
+      return true
     }
     else {
       window.alert('Non-ethereum browser detected')
+      setTimeout(() => { history.push("/") }, 10);
+      return false
     }
   }
 
@@ -71,6 +75,7 @@ const AddLisiting = ({
       console.log(BlockyardsContract)
     } else {
       window.alert('Blockyards not deployed to connected network');
+      setTimeout(() => { history.push("/") }, 10);
     }
   }
 
@@ -82,8 +87,6 @@ const AddLisiting = ({
         isLoading(false)
       })
   }
-
-
 
   async function handleSubmit(event) {
     const data = new FormData(event.currentTarget);

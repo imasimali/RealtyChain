@@ -20,12 +20,56 @@ import {
   PropertyFeatures,
   PropertyDescription,
 } from "../partials/property_features_partial";
+import { useHistory } from 'react-router-dom';
+
+import Web3 from 'web3';
+import Blockyards from '../abis/Blockyards.json';
 
 const Listing = () => {
   const { id } = useParams();
+  const history = useHistory();
   const [featuredProperties, setfeaturedProperties] = useState([])
   const [property, setProperty] = useState({})
   const [isLoading, setIsLoading] = useState(true);
+
+  const [Account, setAccount] = useState("");
+  const [Contract, setContract] = useState("");
+
+  const loadWeb3 = async function() {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum);
+      await window.ethereum.enable()
+      return true
+    }
+    else if (window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider);
+      return true
+    }
+    else {
+      window.alert('Non-ethereum browser detected');
+      setTimeout(() => { history.push("/") }, 10);
+      return false
+    }
+  }
+
+  const loadBlockchainData = async function() {
+    const web3 = window.web3
+    const accounts = await web3.eth.getAccounts()
+    const account = accounts[0]
+    setAccount(account)
+    console.log(accounts[0])
+    // Load contract
+    const networkId = await web3.eth.net.getId()
+    const networkData = Blockyards.networks[networkId]
+    if (networkData) {
+      const BlockyardsContract = new web3.eth.Contract(Blockyards.abi, networkData.address)
+      setContract(BlockyardsContract)
+      console.log(BlockyardsContract)
+    } else {
+      window.alert('Blockyards not deployed to connected network');
+      setTimeout(() => { history.push("/") }, 10);
+    }
+  }
 
   const requestlistings = async function() {
     const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
@@ -43,8 +87,29 @@ const Listing = () => {
     );
     setfeaturedProperties(filteredFeatured);
     setProperty(filteredProperty[0]);
+    const isweb3 = await loadWeb3()
+    isweb3 ? await loadBlockchainData() : null
+    // const isOwner = checkAsset(property._id)
     setIsLoading(false);
   }, [id]);
+
+  const checkAsset = async (_assetId) => {
+    // const _price = window.web3.utils.toWei(value.toString(), 'ether')
+    Contract.methods.get_listing(_assetId).send({ from: Account })
+      .once('receipt', (receipt) => {
+        console.log(receipt)
+      })
+  }
+  
+  const buyAsset = async (_assetId) => {
+    // const _price = window.web3.utils.toWei(value.toString(), 'ether')
+    Contract.methods.buyASSET(_assetId).send({ from: Account })
+      .once('receipt', (receipt) => {
+        console.log(receipt)
+        return receipt
+      })
+  }
+
 
   // console.log(featuredProperties)
   // console.log(property)
@@ -85,7 +150,7 @@ const Listing = () => {
                 <PropertyDescription description={property.description} />
               </Property.Left>
               <Property.Right>
-                <ContactAgentContainer property={property} />
+                <ContactAgentContainer buyAsset={buyAsset} Account={Account} property={property} />
                 <PropertyRelatedContainer
                   property={property}
                   featured={featuredProperties}

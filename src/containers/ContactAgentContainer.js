@@ -1,6 +1,31 @@
 import React from "react";
 import { Property, Form } from "../components";
-const ContactAgentContainer = ({ property }) => {
+const ContactAgentContainer = ({ property, buyAsset, Account }) => {
+
+  async function handleSubmit(event) {
+    const price = property.price
+
+    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/update`, {
+      method: 'POST',
+      body: JSON.stringify({
+        id: property._id,
+        owner: Account,
+      }),
+    })
+
+    if (Account != undefined && price != undefined) {
+      const cRes = await buyAsset(property._id);
+      // console.log(cRes)
+      const result = await res.json();
+      console.log(result.result)
+      // document.getElementById(".message").innerText = ``
+    }
+    else {
+      // document.getElementById(".message").innerText = `Request Failed - Please check input`
+      console.log("else")
+    }
+  }
+
   return (
     <Property.Contact>
       <Property.ContactHeader>
@@ -13,21 +38,29 @@ const ContactAgentContainer = ({ property }) => {
           />
         </Property.ContactItem>
         <Property.ContactItem>
-          <Property.Subtitle>{property.owner? property.owner.name : "Loading"}</Property.Subtitle>
+          <Property.Subtitle>{property.owner ? property.owner.name : "Loading"}</Property.Subtitle>
           <Property.ContactList>
             <Property.ListItem>
               {/*<Property.Icon name="fas fa-phone-alt"></Property.Icon>*/}
-              <Property.Text>{property.owner? property.owner.metaid : "Loading"}</Property.Text>
+              <Property.Text>{property.owner ? property.owner.metaid.substring(2, 22) : "Loading"}<br />{property.owner ? property.owner.metaid.substring(22, 43) : "Loading"}</Property.Text>
             </Property.ListItem>
           </Property.ContactList>
         </Property.ContactItem>
       </Property.ContactHeader>
-      
+
       <Property.ContactContent>
         <Property.ContactContainer>
-          <Form.FormGroup>
-            <Form.SubmitInput type="submit" value="Buy Now" />
-          </Form.FormGroup>
+          {property ?.owner.metaid !== Account ?
+            <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }}>
+              <Form.FormGroup>
+                <Form.SubmitInput type="submit" value="Buy Now" />
+              </Form.FormGroup>
+            </Form> :
+            <Form onSubmit={(e) => { e.preventDefault() }}>
+              <Form.FormGroup>
+                <Form.SubmitInput value="Listed Property" />
+              </Form.FormGroup>
+            </Form>}
           {/*<Form>
             <Form.FormGroup>
               <Form.Input type="text" placeholder="Name" />
