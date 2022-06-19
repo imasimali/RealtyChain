@@ -37,7 +37,7 @@ const HeaderContainer = ({ bg, source, user }) => {
         <HeaderWrapper.Container>
           <HeaderWrapper.Title bg={bg}>
             <HeaderWrapper.Link bg={bg} fixed={fixed} to="/">
-              {(bg === "true" && fixed) ? <img src="logo-blue.png" width="85" height="70" /> : bg === "true" ? <img src="logo-white.png" width="85" height="70" /> : <img src="logo-blue.png" width="85" height="70" />}
+              {(bg === "true" && fixed) ? <img src="//blockchainrealestate.whizz-kid.repl.co/logo-blue.png" width="85" height="70" /> : bg === "true" ? <img src="//blockchainrealestate.whizz-kid.repl.co/logo-white.png" width="85" height="70" /> : <img src="//blockchainrealestate.whizz-kid.repl.co/logo-blue.png" width="85" height="70" />}
             </HeaderWrapper.Link>
           </HeaderWrapper.Title>
           <HeaderWrapper.LinksContainer>
