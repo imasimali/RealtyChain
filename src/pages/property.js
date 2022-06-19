@@ -93,21 +93,48 @@ const Listing = () => {
     setIsLoading(false);
   }, [id]);
 
-  const checkAsset = async (_assetId) => {
-    // const _price = window.web3.utils.toWei(value.toString(), 'ether')
-    Contract.methods.get_listing(_assetId).send({ from: Account })
-      .once('receipt', (receipt) => {
-        console.log(receipt)
-      })
-  }
+  // const checkAsset = async (_assetId) => {
+  //   // const _price = window.web3.utils.toWei(value.toString(), 'ether')
+  //   Contract.methods.get_listing(_assetId).send({ from: Account })
+  //     .once('receipt', (receipt) => {
+  //       console.log(receipt)
+  //     })
+  // }
   
   const buyAsset = async (_assetId) => {
     // const _price = window.web3.utils.toWei(value.toString(), 'ether')
     Contract.methods.buyASSET(_assetId).send({ from: Account })
       .once('receipt', (receipt) => {
         console.log(receipt)
-        return receipt
+        receipt.status ? update(): null
       })
+  }
+
+  const update = async function(){
+    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/update`, {
+      method: 'POST',
+      body: JSON.stringify({
+        id: property._id,
+        owner: Account,
+      }),
+    })
+    const result = await res.json()
+    return result
+  } 
+
+  async function handleSubmit(event) {
+    const price = property.price
+
+    if (Account != undefined && price != undefined) {
+      await buyAsset(property._id);
+      // console.log(cRes)
+      
+      // document.getElementById(".message").innerText = ``
+    }
+    else {
+      // document.getElementById(".message").innerText = `Request Failed - Please check input`
+      console.log("else")
+    }
   }
 
 
@@ -150,7 +177,7 @@ const Listing = () => {
                 <PropertyDescription description={property.description} />
               </Property.Left>
               <Property.Right>
-                <ContactAgentContainer buyAsset={buyAsset} Account={Account} property={property} />
+                <ContactAgentContainer handleSubmit={handleSubmit} Account={Account} property={property} />
                 <PropertyRelatedContainer
                   property={property}
                   featured={featuredProperties}

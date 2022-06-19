@@ -1,30 +1,6 @@
 import React from "react";
 import { Property, Form } from "../components";
-const ContactAgentContainer = ({ property, buyAsset, Account }) => {
-
-  async function handleSubmit(event) {
-    const price = property.price
-
-    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/update`, {
-      method: 'POST',
-      body: JSON.stringify({
-        id: property._id,
-        owner: Account,
-      }),
-    })
-
-    if (Account != undefined && price != undefined) {
-      const cRes = await buyAsset(property._id);
-      // console.log(cRes)
-      const result = await res.json();
-      console.log(result.result)
-      // document.getElementById(".message").innerText = ``
-    }
-    else {
-      // document.getElementById(".message").innerText = `Request Failed - Please check input`
-      console.log("else")
-    }
-  }
+const ContactAgentContainer = ({ property, Account, handleSubmit }) => {
 
   return (
     <Property.Contact>
