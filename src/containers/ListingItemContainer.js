@@ -25,7 +25,7 @@ const ListingItemContainer = ({ featured, width }) => {
               {featured.type} For Sale
             </Listing.Anchor>
           </Listing.Title>
-          <Listing.Price>PKR {featured.price}</Listing.Price>
+          <Listing.Price>ETH {featured.price}</Listing.Price>
           <Listing.Text description>
             {featured.description.substring(0, 100)}
           </Listing.Text>

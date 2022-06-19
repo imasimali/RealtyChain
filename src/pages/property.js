@@ -68,7 +68,7 @@ const Listing = () => {
               </Property.HeaderLeft>
               <Property.HeaderRight>
                 <Property.Title>
-                  PKR {"   "}
+                  ETH {"   "}
                   {property.price}
                   <Property.Span>
                     {property.type === "rental" ? "/ Month" : ""}

@@ -34,7 +34,7 @@ const FeaturedItem = ({ property }) => {
         </Property.Text>
         <Property.FeaturedInfo>
           <Property.Text>
-            PKR {property.price}{/*property.type === "rental" ? "Rent" : "Sale"*/}
+            ETH {property.price}{/*property.type === "rental" ? "Rent" : "Sale"*/}
           </Property.Text>
           <Property.Text></Property.Text>
         </Property.FeaturedInfo>

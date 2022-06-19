@@ -121,11 +121,12 @@ const AdvancedSearchContainer = (props) => {
           <Form.FormGroup>
             <Form.Span>
               {" "}
-              Price range: PKR {priceFormat(+priceRange)} to PKR{" "}
-              {priceFormat(maxPrice)}
+              Price range: ETH {priceRange} to ETH{" "}
+              {maxPrice}
             </Form.Span>
             <Form.RangeInput
               type="range"
+              step="0.01"
               min={minPrice}
               max={maxPrice}
               value={priceRange}

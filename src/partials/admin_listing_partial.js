@@ -7,7 +7,7 @@ const PropertyHead = () => {
     <Table.Head>
       <Table.Row>
         <Table.Data>Name</Table.Data>
-        <Table.Data>Price (PKR)</Table.Data>
+        <Table.Data>Price (ETH)</Table.Data>
         <Table.Data>Category</Table.Data>
         <Table.Data>Listed In</Table.Data>
         <Table.Data>County</Table.Data>

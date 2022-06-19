@@ -17,6 +17,7 @@ import {
   Media,
   Details,
 } from "../partials/add_property_partials";
+import { useHistory } from 'react-router-dom';
 
 import Web3 from 'web3';
 import Blockyards from '../abis/Blockyards.json';
@@ -31,6 +32,7 @@ const AddLisiting = ({
   const { id } = useParams();
   const [childData, setChildData] = useState("");
   const [newpropertyid, setNewpropertyid] = useState("");
+  const history = useHistory();
 
   const [Account, setAccount] = useState("");
   const [Contract, setContract] = useState("");
@@ -42,11 +44,11 @@ const AddLisiting = ({
   }, []);
 
   const loadWeb3 = async function() {
-    if(window.ethereum) {
+    if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
       await window.ethereum.enable()
     }
-    else if(window.web3) {
+    else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider);
     }
     else {
@@ -63,7 +65,7 @@ const AddLisiting = ({
     // Load contract
     const networkId = await web3.eth.net.getId()
     const networkData = Blockyards.networks[networkId]
-    if(networkData) {
+    if (networkData) {
       const BlockyardsContract = new web3.eth.Contract(Blockyards.abi, networkData.address)
       setContract(BlockyardsContract)
       console.log(BlockyardsContract)
@@ -76,12 +78,12 @@ const AddLisiting = ({
     isLoading(true)
     const _price = window.web3.utils.toWei(value.toString(), 'ether')
     Contract.methods.listASSET(_assetId, _price, _metadata).send({ from: Account })
-    .once('receipt', (receipt) => {
-      isLoading(false)
-    })
+      .once('receipt', (receipt) => {
+        isLoading(false)
+      })
   }
 
-  
+
 
   async function handleSubmit(event) {
     const data = new FormData(event.currentTarget);
@@ -92,7 +94,7 @@ const AddLisiting = ({
     const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`, {
       method: 'POST',
       body: JSON.stringify({
-        email: user?.email ? user.email : "None",
+        email: user ?.email ? user.email : "None",
         waddress: Account,
         images: childData,
         category: data.get("category"),
@@ -116,15 +118,16 @@ const AddLisiting = ({
         amenities: data.get("amenities").split(','),
       }),
     })
-    if(Account != undefined && price != undefined && meta != undefined && !isNaN(price)) {  
+    if (Account != undefined && price != undefined && meta != undefined && !isNaN(price)) {
       const resulting = await res.json();
       setNewpropertyid(resulting.result);
       console.log(resulting.result);
       addLand(newpropertyid, price, meta);
       event.target.reset();
       document.getElementById(".message").innerText = ``
+      setTimeout(() => { history.push("/property/" + resulting.result) }, 5000)
     }
-    else{
+    else {
       document.getElementById(".message").innerText = `Request Failed - Please check input`
     }
   }
