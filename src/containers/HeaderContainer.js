@@ -37,7 +37,7 @@ const HeaderContainer = ({ bg, source, user }) => {
         <HeaderWrapper.Container>
           <HeaderWrapper.Title bg={bg}>
             <HeaderWrapper.Link bg={bg} fixed={fixed} to="/">
-              Block Yards
+              Blockyards
             </HeaderWrapper.Link>
           </HeaderWrapper.Title>
           <HeaderWrapper.LinksContainer>

@@ -85,6 +85,8 @@ const AddLisiting = ({
 
   async function handleSubmit(event) {
     const data = new FormData(event.currentTarget);
+    const price = data.get("price")
+    const meta = user.email || "none"
     // console.log(childData)
 
     const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`, {
@@ -114,11 +116,17 @@ const AddLisiting = ({
         amenities: data.get("amenities").split(','),
       }),
     })
-    const resulting = await res.json();
-    setNewpropertyid(resulting.result);
-    console.log(resulting.result);
-    addLand(newpropertyid, data.get("price"), user.email);
-    event.target.reset();
+    if(Account != undefined && price != undefined && meta != undefined && !isNaN(price)) {  
+      const resulting = await res.json();
+      setNewpropertyid(resulting.result);
+      console.log(resulting.result);
+      addLand(newpropertyid, price, meta);
+      event.target.reset();
+      document.getElementById(".message").innerText = ``
+    }
+    else{
+      document.getElementById(".message").innerText = `Request Failed - Please check input`
+    }
   }
 
   return (
@@ -139,6 +147,7 @@ const AddLisiting = ({
                       type="submit"
                       value={id ? "Update Property" : "Submit Property"}
                     />
+                    <div id=".message"></div>
                   </Form.FormGroup>
                   {id && (
                     <Form.FormGroup class="form-group">

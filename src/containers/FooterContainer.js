@@ -7,7 +7,7 @@ const FooterContainer = () => {
       <Footer.Container>
         <Footer.Content>
           <Footer.Item>
-            <Footer.Title>Block Yards</Footer.Title>
+            <Footer.Title>Blockyards</Footer.Title>
             <Footer.Text>
               FCC Road, Lahore. Punjab, Pakistan, 54000
             </Footer.Text>
@@ -99,7 +99,7 @@ const FooterContainer = () => {
       </Footer.Container>
       <Footer.Bottom>
         <Footer.Container>
-          <Footer.Text>&copy; Block Yards. All Rights Reserved</Footer.Text>
+          <Footer.Text>&copy; Blockyards. All Rights Reserved</Footer.Text>
         </Footer.Container>
       </Footer.Bottom>
     </Footer>
