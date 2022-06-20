@@ -51,10 +51,6 @@ const Signupp = ({
             <Signup.InnerContent>
               <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
                 <Form.FormGroup>
-                  <Form.Label>Name</Form.Label>
-                  <Form.Input type="text" />
-                </Form.FormGroup>
-                <Form.FormGroup>
                   <Form.Label>Email</Form.Label>
                   <Form.Input onChange={(e) => setEmail(e.target.value)} type="text" />
                 </Form.FormGroup>

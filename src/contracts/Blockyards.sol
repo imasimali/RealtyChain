@@ -9,9 +9,27 @@ pragma solidity ^0.8.9;
 contract Blockyards{
 
     //EVENTS - used to ouput data externally after makings changes. 
-    //event ASSET_GOT_LISTED(uint assetId, address seller, address token, uint assetId, uint price  );
-    //event ASSET_SOLD(uint listingId, address buyer, address token, uint assetId, uint price  );
-    //event ASSET_LISTING_CANCELLED(uint listingId, address seller);
+    event ASSET_LISTED(
+        string assetId,
+        address seller,
+        uint price,
+        string metadata  
+    );
+    
+    event ASSET_BOUGHT(
+        string assetId,
+        address seller,
+        address buyer,
+        uint price,
+        string metadata
+      );
+
+    event ASSET_DELISTED(
+        string assetId, 
+        address seller,
+        uint price,
+        string metadata
+    );
 
     address Admin;
      //ENUMS- are statuses.
@@ -44,11 +62,11 @@ contract Blockyards{
         _;
     }
 
-
     //GETTER-FUNCTION-returns listing details acc to its assetId.
     function get_listing(string memory _assetId) public view returns(ASSET memory){
         ASSET memory listing = _listings[_assetId];
-        require(listing.status == ListingStatus.active_0, "Only properties with an active status can be shown");
+        require(keccak256(abi.encodePacked((listing.assetId))) != keccak256(abi.encodePacked((''))), "Please make sure this property is listed");
+        //require(listing.status != ListingStatus.active_0, "Only properties with an active status can be shown");
         return _listings[_assetId];
     }
 
@@ -60,6 +78,13 @@ contract Blockyards{
         ASSET memory listing = ASSET(ListingStatus.active_0, _assetId, _price, msg.sender, _metadata, msg.sender);
         listingId++;                        //listing counter starts from 1 and increments further
         _listings[_assetId] = listing;    //stores asset at the index acc to its assetId   
+
+        emit ASSET_LISTED(
+            listing.assetId,
+            listing.seller,
+            listing.price,
+            listing.metadata 
+        );
     }
 
     //FUNCTION-buys assets
@@ -67,13 +92,21 @@ contract Blockyards{
         //storage means the listing variable is not temporary
         ASSET storage listing = _listings[_assetId];
         require(msg.sender != listing.seller, "seller cannot buy their own asset");
-        require(listing.status == ListingStatus.active_0, "Only active properties can be bought");
+        require(listing.status == ListingStatus.active_0, "Only active properties can be bought. ");
         require(msg.value >= listing.price, "insufficient funds");
         
         payable(listing.seller).transfer(listing.price);        //payment
         listing.owner = msg.sender;                             //buyer is the owner now
         listing.status = ListingStatus.sold_1;    //status will be updated 
         listing.seller = 0x0000000000000000000000000000000000000000; //asset has no seller now
+
+        emit ASSET_BOUGHT(
+            listing.assetId,
+            listing.seller,
+            msg.sender,
+            listing.price,
+            listing.metadata 
+        );
     }
 
     function delistASSET(string memory _assetId) external isSeller(_assetId) {
@@ -81,6 +114,13 @@ contract Blockyards{
         ASSET storage listing = _listings[_assetId];
         require(listing.status == ListingStatus.active_0, "if status != active_0, then can't cancel");
         listing.status = ListingStatus.cancelled_2;     //listing status of asset set to 2nd state which is cancelled
+
+        emit ASSET_DELISTED(
+            listing.assetId,
+            listing.seller,
+            listing.price,
+            listing.metadata 
+        );
     }
 
 }

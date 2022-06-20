@@ -92,18 +92,17 @@ const Listing = () => {
     // const isOwner = checkAsset(property._id)
     setIsLoading(false);
   }, [id]);
-
-  // const checkAsset = async (_assetId) => {
-  //   // const _price = window.web3.utils.toWei(value.toString(), 'ether')
-  //   Contract.methods.get_listing(_assetId).send({ from: Account })
-  //     .once('receipt', (receipt) => {
-  //       console.log(receipt)
-  //     })
-  // }
   
   const buyAsset = async (_assetId) => {
-    // const _price = window.web3.utils.toWei(value.toString(), 'ether')
     Contract.methods.buyASSET(_assetId).send({ from: Account })
+      .once('receipt', (receipt) => {
+        console.log(receipt)
+        receipt.status ? update(): null
+      })
+  }
+
+  const delistAsset = async (_assetId) => {
+    Contract.methods.delistASSET(_assetId).send({ from: Account })
       .once('receipt', (receipt) => {
         console.log(receipt)
         receipt.status ? update(): null
@@ -122,21 +121,19 @@ const Listing = () => {
     return result
   } 
 
-  async function handleSubmit(event) {
-    const price = property.price
-
-    if (Account != undefined && price != undefined) {
+  async function handleBuy(event) {
+    if (Account != undefined && property._id != undefined) {
       await buyAsset(property._id);
       // console.log(cRes)
-      
-      // document.getElementById(".message").innerText = ``
-    }
-    else {
-      // document.getElementById(".message").innerText = `Request Failed - Please check input`
-      console.log("else")
     }
   }
 
+  async function handleDelist(event) {
+    if (Account != undefined && property._id != undefined) {
+      await delistAsset(property._id);
+      // console.log(cRes)
+    }
+  }
 
   // console.log(featuredProperties)
   // console.log(property)
@@ -177,7 +174,7 @@ const Listing = () => {
                 <PropertyDescription description={property.description} />
               </Property.Left>
               <Property.Right>
-                <ContactAgentContainer handleSubmit={handleSubmit} Account={Account} property={property} />
+                <ContactAgentContainer handleDelist={handleDelist} handleBuy={handleBuy} Account={Account} property={property} />
                 <PropertyRelatedContainer
                   property={property}
                   featured={featuredProperties}

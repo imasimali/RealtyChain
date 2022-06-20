@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 
-import { getPropertyList } from "../redux/actions/propertiesAction";
+// import { getPropertyList } from "../redux/actions/propertiesAction";
 import {
   AdminListingHeader,
   PropertyData,
@@ -12,31 +12,41 @@ import {
 import { Table, AdminListing } from "../components";
 
 const AdminAgentListing = () => {
-  const [selectId, setSelectId] = useState(null);
+  const [properties, setProperties] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
+  const [childData, setChildData] = useState([]);
 
-  const dispatch = useDispatch();
+  const requestlistings = async function() {
+    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
+    const json = await res.json()
+    return json
+  };
 
-  const { properties } = useSelector((state) => state.propertyList);
+  useEffect(async () => {
+    const res = await requestlistings();
+    setProperties(res);
+    setIsLoading(false);
+  }, []);
 
   useEffect(() => {
-    dispatch(getPropertyList());
-  }, [dispatch]);
+    setProperties(childData);
+  }, [childData]);
 
   const handleDeleteAction = (id) => console.log(id);
   return (
     <AdminListing>
-      <AdminListing.Top>
+      {/*<AdminListing.Top>
         <AdminListingHeader
           selectId={selectId}
           handleDeleteAction={handleDeleteAction}
         />
-      </AdminListing.Top>
+      </AdminListing.Top>*/}
       <AdminListing.Content>
         <Table>
           <PropertyHead />
           <Table.Body>
             {properties.map((property) => (
-              <PropertyData property={property} setSelectId={setSelectId} />
+              <PropertyData property={property} setChildData={setChildData} />
             ))}
           </Table.Body>
         </Table>

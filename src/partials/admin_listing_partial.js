@@ -9,35 +9,41 @@ const PropertyHead = () => {
         <Table.Data>Name</Table.Data>
         <Table.Data>Price (ETH)</Table.Data>
         <Table.Data>Category</Table.Data>
-        <Table.Data>Listed In</Table.Data>
-        <Table.Data>County</Table.Data>
-        <Table.Data>Town</Table.Data>
+        <Table.Data>Bedrooms</Table.Data>
+        <Table.Data>Baths</Table.Data>
+        <Table.Data>Amenities</Table.Data>
         <Table.Data>Action</Table.Data>
       </Table.Row>
     </Table.Head>
   );
 };
-const PropertyData = ({ property, setSelectId }) => {
-  const [selected, setSelected] = useState(false);
+const PropertyData = ({ property, setChildData }) => {
+  // const [selected, setSelected] = useState(false);
 
-  const handleSelect = (id) => {
-    setSelected((prevState) => !prevState);
-    setSelectId(id);
+  const handleUpdate = (id) => {
+    
+    // setSelected((prevState) => !prevState);
+    // setChildData(id);
   };
 
   return (
     <Table.Row>
-      <Table.Data>{property.title}</Table.Data>
+      <Table.Data>{property._id}</Table.Data>
       <Table.Data>{property.price}</Table.Data>
-      <Table.Data>{property.category}</Table.Data>
-      <Table.Data>{property.listedIn}</Table.Data>
-      <Table.Data>{property.address.county}</Table.Data>
-      <Table.Data>{property.address.city}</Table.Data>
-      <Table.Data>
-        <Table.Button onClick={() => handleSelect(property.id)}>
-          {selected ? "Selected" : "Select"}
+      <Table.Data>{property.type}</Table.Data>
+      <Table.Data>{property.features.beds}</Table.Data>
+      <Table.Data>{property.features.baths}</Table.Data>
+      <Table.Data>{property.amenities}</Table.Data>
+      {property.featured? <Table.Data>
+        <Table.Button onClick={(e) => {e.preventDefault(); handleUpdate(property.id);}}>
+          Update
         </Table.Button>
-      </Table.Data>
+      </Table.Data> :
+      <Table.Data>
+        <Table.Button >
+          Listed
+        </Table.Button>
+      </Table.Data>}
     </Table.Row>
   );
 };

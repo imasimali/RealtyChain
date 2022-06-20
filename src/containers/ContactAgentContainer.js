@@ -1,6 +1,6 @@
 import React from "react";
 import { Property, Form } from "../components";
-const ContactAgentContainer = ({ property, Account, handleSubmit }) => {
+const ContactAgentContainer = ({ property, Account, handleBuy, handleDelist }) => {
 
   return (
     <Property.Contact>
@@ -26,15 +26,20 @@ const ContactAgentContainer = ({ property, Account, handleSubmit }) => {
 
       <Property.ContactContent>
         <Property.ContactContainer>
-          {property ?.owner.metaid !== Account ?
-            <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }}>
+          {property ?.featured ? property ?.owner.metaid !== Account ?
+            <Form onSubmit={(e) => { e.preventDefault(); handleBuy(e); }}>
               <Form.FormGroup>
                 <Form.SubmitInput type="submit" value="Buy Now" />
               </Form.FormGroup>
             </Form> :
-            <Form onSubmit={(e) => { e.preventDefault() }}>
+            <Form onSubmit={(e) => { e.preventDefault(); handleDelist(e); }}>
               <Form.FormGroup>
-                <Form.SubmitInput value="Listed Property" />
+                <Form.SubmitInput type="submit" value="Delist Property" />
+              </Form.FormGroup>
+            </Form> : 
+          <Form onSubmit={(e) => { e.preventDefault() }}>
+              <Form.FormGroup>
+                <Form.SubmitInput value="Not for Sale" />
               </Form.FormGroup>
             </Form>}
           {/*<Form>
