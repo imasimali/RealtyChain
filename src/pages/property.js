@@ -22,10 +22,20 @@ import {
 } from "../partials/property_features_partial";
 import { useHistory } from 'react-router-dom';
 
+import firebase from "firebase";
+import withFirebaseAuth from "react-with-firebase-auth";
+import firebaseConfig from "../firebaseConfig";
+
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
 import Web3 from 'web3';
 import Blockyards from '../abis/Blockyards.json';
 
-const Listing = () => {
+const Listing = ({
+  user
+}) => {
   const { id } = useParams();
   const history = useHistory();
   const [featuredProperties, setfeaturedProperties] = useState([])
@@ -114,6 +124,7 @@ const Listing = () => {
       method: 'POST',
       body: JSON.stringify({
         id: property._id,
+        email: user.email,
         owner: Account,
       }),
     })
@@ -190,4 +201,8 @@ const Listing = () => {
   );
 };
 
-export default Listing;
+// export default Listing;
+
+const firebaseAppAuth = firebaseApp.auth();
+
+export default withFirebaseAuth({ firebaseAppAuth })(Listing);

@@ -79,7 +79,7 @@ const AdminAgentListing = ({
   useEffect(async () => {
     const res = await requestlistings();
     const filteredProperty = res.filter(
-      (property) => property.owner.name === user?.email && property.featured === false
+      (property) => property.owner.name === user ?.email && property.featured === false
     );
     console.log(filteredProperty)
     setProperties(filteredProperty);
@@ -93,13 +93,13 @@ const AdminAgentListing = ({
     const _price = window.web3.utils.toWei(value.toString(), 'ether')
     Contract.methods.listASSET(_assetId, _price, _metadata).send({ from: Account })
       .once('receipt', (receipt) => {
-        receipt.status? update(data): null
+        receipt.status ? update(data) : null
         setIsLoading(false)
         setTimeout(() => { history.push("/property/" + data.propertyid) }, 15000)
       })
   }
-  
-  const update = async function(data){
+
+  const update = async function(data) {
     const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/relist`, {
       method: 'POST',
       body: JSON.stringify({
@@ -113,7 +113,7 @@ const AdminAgentListing = ({
     })
     const result = await res.json()
     return result
-  } 
+  }
 
   async function handleSubmit(data) {
     const meta = user.email || "none"
@@ -124,7 +124,7 @@ const AdminAgentListing = ({
   }
 
   // const handleDeleteAction = (id) => console.log(id);
-  
+
   return (
     <AdminListing>
       {/*<AdminListing.Top>
