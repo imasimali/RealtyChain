@@ -8,7 +8,6 @@ const PropertyHead = () => {
       <Table.Row>
         <Table.Data>Name</Table.Data>
         <Table.Data>Price (ETH)</Table.Data>
-        <Table.Data>Category</Table.Data>
         <Table.Data>Bedrooms</Table.Data>
         <Table.Data>Baths</Table.Data>
         <Table.Data>Amenities</Table.Data>
@@ -17,34 +16,34 @@ const PropertyHead = () => {
     </Table.Head>
   );
 };
-const PropertyData = ({ property, setChildData }) => {
-  // const [selected, setSelected] = useState(false);
+const PropertyData = ({ property, handleSubmit }) => {
+  const [iprice, setPrice] = useState("");
+  const [ibeds, setBeds] = useState("");
+  const [ibaths, setBaths] = useState("");
+  const [iamenities, setAmenities] = useState("");
 
-  const handleUpdate = (id) => {
-    
-    // setSelected((prevState) => !prevState);
-    // setChildData(id);
+  const handleUpdate = () => {
+    const data = {
+      propertyid: property._id,
+      price: iprice,
+      beds: ibeds,
+      baths: ibaths,
+      amenities: iamenities,
+    }
+    handleSubmit(data)
   };
 
   return (
-    <Table.Row>
-      <Table.Data>{property._id}</Table.Data>
-      <Table.Data>{property.price}</Table.Data>
-      <Table.Data>{property.type}</Table.Data>
-      <Table.Data>{property.features.beds}</Table.Data>
-      <Table.Data>{property.features.baths}</Table.Data>
-      <Table.Data>{property.amenities}</Table.Data>
-      {property.featured? <Table.Data>
-        <Table.Button onClick={(e) => {e.preventDefault(); handleUpdate(property.id);}}>
-          Update
-        </Table.Button>
-      </Table.Data> :
-      <Table.Data>
-        <Table.Button >
-          Listed
-        </Table.Button>
-      </Table.Data>}
-    </Table.Row>
+      <Table.Row>
+        <Table.Data>{property._id}</Table.Data>
+        <Table.Data><Form.Input type="text" placeholder="i.e 0.005" required onChange={(e) => setPrice(e.target.value)}/></Table.Data>
+        <Table.Data><Form.Input type="text" placeholder="i.e 5" required onChange={(e) => setBeds(e.target.value)}/></Table.Data>
+        <Table.Data><Form.Input type="text" placeholder="i.e 4" required onChange={(e) => setBaths(e.target.value)}/></Table.Data>
+        <Table.Data><Form.Input type="text" placeholder="i.e Fireplace" required onChange={(e) => setAmenities(e.target.value)}/></Table.Data>
+        <Table.Data>
+        <Table.Button type="submit" onClick={(e) => {e.preventDefault(); handleUpdate(e);}}>Update</Table.Button>
+        </Table.Data>
+      </Table.Row>
   );
 };
 

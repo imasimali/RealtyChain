@@ -128,7 +128,7 @@ const AddLisiting = ({
       addLand(newpropertyid, price, meta);
       event.target.reset();
       document.getElementById(".message").innerText = ``
-      setTimeout(() => { history.push("/property/" + resulting.result) }, 5000)
+      setTimeout(() => { history.push("/property/" + resulting.result) }, 15000)
     }
     else {
       document.getElementById(".message").innerText = `Request Failed - Please check input`

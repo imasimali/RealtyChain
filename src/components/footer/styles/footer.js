@@ -36,7 +36,7 @@ export const Title = styled.h2`
   color: var(--bs-white);
   font-weight: bold;
   font-size: 2rem;
-  padding: 24px 0px;
+  padding: 4px 0px;
 `;
 export const Subtitle = styled.h2`
   color: var(--bs-white);

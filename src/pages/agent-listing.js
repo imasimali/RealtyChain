@@ -13,7 +13,7 @@ const AgentListing = () => {
       <HeaderContainer bg={false} />
       <Section bgColor="--bs-fade-info">
         <Section.InnerContainer>
-          <DashboardContainer title="My Listing">
+          <DashboardContainer title="Delisted Properties">
             <AdminAgentListing />
           </DashboardContainer>
         </Section.InnerContainer>

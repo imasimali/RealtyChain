@@ -37,7 +37,7 @@ const HeaderContainer = ({ bg, source, user }) => {
         <HeaderWrapper.Container>
           <HeaderWrapper.Title bg={bg}>
             <HeaderWrapper.Link bg={bg} fixed={fixed} to="/">
-              {(bg === "true" && fixed) ? <img src="//firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-blue.png?alt=media" width="85" height="70" /> : bg === "true" ? <img src="//firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-white.png?alt=media" width="85" height="70" /> : <img src="//firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-blue.png?alt=media" width="85" height="70" />}
+              {(bg === "true" && fixed) ? <img src="//firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-blue.png?alt=media" width="190" height="120" /> : bg === "true" ? <img src="//firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-white.png?alt=media" width="190" height="120" /> : <img src="//firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-blue.png?alt=media" width="190" height="120" />}
             </HeaderWrapper.Link>
           </HeaderWrapper.Title>
           <HeaderWrapper.LinksContainer>
