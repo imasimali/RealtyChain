@@ -2,7 +2,7 @@
 ## De-centralized Real estate web app built using React, Truffle, Metamask and Solidity on Ethereum Chain.
 
 This web app uses the Ethereum public chain to store the information of real estate, It is setup with Firebase authentication and Metamask auth for transactions.
-On the backend I have MongoDB setup to store the meta data of users and properties. I have also setup Firebase Storage to store the properties images.
+On the backend I have MongoDB setup to store the data of users and properties that was not necessary to store on the Ethereum chain. I have also setup Firebase Storage to store the properties images.
 
 ## Project Description
 There are multiple websites and apps that have been implemented to market real estate properties but none of them have an online system of verified transactions. A seller or a buyer must go through lengthy processes of property registration and ownership paperwork which is usually done in person and has no means of an instant, authenticated proof on the internet.
