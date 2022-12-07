@@ -10,14 +10,14 @@ import { Section } from "../components";
 // import { getPropertyList } from "../redux/actions/propertiesAction";
 
 const Listing = () => {
-  const [properties, setProperties] = useState([])
+  const [properties, setProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [childData, setChildData] = useState([]);
 
-  const requestlistings = async function() {
-    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
-    const json = await res.json()
-    return json
+  const requestlistings = async function () {
+    const res = await fetch(`/.netlify/functions/addnew`);
+    const json = await res.json();
+    return json;
   };
 
   useEffect(async () => {
@@ -30,7 +30,7 @@ const Listing = () => {
     setProperties(childData);
   }, [childData]);
 
-  console.log(properties)
+  console.log(properties);
   return (
     <>
       <HeaderContainer bg="false" />
@@ -47,16 +47,16 @@ const Listing = () => {
               {isLoading ? (
                 <h3>Loading ...</h3>
               ) : (
-                  <Section.Content>
-                    {properties.map((featured) => (
-                      <ListingItemContainer
-                        key={featured._id}
-                        featured={featured}
-                        width="49%"
-                      />
-                    ))}
-                  </Section.Content>
-                )}
+                <Section.Content>
+                  {properties.map((featured) => (
+                    <ListingItemContainer
+                      key={featured._id}
+                      featured={featured}
+                      width="49%"
+                    />
+                  ))}
+                </Section.Content>
+              )}
               <Section.Footer>
                 <Section.Button>More Listing</Section.Button>
               </Section.Footer>

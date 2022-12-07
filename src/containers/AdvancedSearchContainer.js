@@ -11,10 +11,10 @@ const AdvancedSearchContainer = (props) => {
   const [priceRange, setPriceRange] = useState(0);
   const [properties, setProperties] = useState([]);
 
-  const requestlistings = async function() {
-    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
-    const json = await res.json()
-    return json
+  const requestlistings = async function () {
+    const res = await fetch(`/.netlify/functions/addnew`);
+    const json = await res.json();
+    return json;
   };
 
   useEffect(async () => {
@@ -22,17 +22,12 @@ const AdvancedSearchContainer = (props) => {
     setProperties(res);
   }, []);
 
-
-  const price = properties.map(
-    (property) => +property.price
-  );
+  const price = properties.map((property) => +property.price);
 
   const maxPrice = Math.max.apply(null, price),
     minPrice = Math.min.apply(null, price);
 
-  const categories = [
-    ...new Set(properties.map((property) => property.type)),
-  ];
+  const categories = [...new Set(properties.map((property) => property.type))];
 
   const area = [
     ...new Set(properties.map((property) => property.address.areatext)),
@@ -41,7 +36,7 @@ const AdvancedSearchContainer = (props) => {
   const locations = [
     ...new Set(properties.map((property) => property.address.city)),
   ];
-  
+
   const rooms = [
     ...new Set(properties.map((property) => property.features.beds)),
   ].sort((a, b) => a - b);
@@ -53,8 +48,8 @@ const AdvancedSearchContainer = (props) => {
   async function handleSubmit(event) {
     const data = new FormData(event.currentTarget);
 
-    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/search`, {
-      method: 'POST',
+    const res = await fetch(`/.netlify/functions/search`, {
+      method: "POST",
       body: JSON.stringify({
         type: data.get("type"),
         location: data.get("location"),
@@ -64,19 +59,24 @@ const AdvancedSearchContainer = (props) => {
         searchfield: data.get("searchfield"),
         price: priceRange,
       }),
-    })
-    const resulting = await res.json();
-    resulting.result.length != 0 ? props.passChildData(resulting.result) : null
-    console.log(resulting.result)
+    });
+    const json = await res.json();
+    json.length != 0 ? props.passChildData(json) : null;
+    console.log(json);
   }
-  
+
   return (
     <FormWrapper>
       <FormWrapper.Header>
         <FormWrapper.Title>Advanced Search</FormWrapper.Title>
       </FormWrapper.Header>
       <FormWrapper.Content>
-        <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }}>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(e);
+          }}
+        >
           <Form.FormGroup>
             <Form.Select name="type" required>
               <Form.Option defaultValue>Property Type</Form.Option>
@@ -97,7 +97,9 @@ const AdvancedSearchContainer = (props) => {
             <Form.Select name="area">
               <Form.Option defaultValue>Area (Marla or Kanal)</Form.Option>
               {area.map((area) => (
-                <Form.Option key={Math.random(area)} value={area}>{area}</Form.Option>
+                <Form.Option key={Math.random(area)} value={area}>
+                  {area}
+                </Form.Option>
               ))}
             </Form.Select>
           </Form.FormGroup>
@@ -105,7 +107,9 @@ const AdvancedSearchContainer = (props) => {
             <Form.Select name="beds">
               <Form.Option defaultValue>Bed Rooms</Form.Option>
               {rooms.map((room) => (
-                <Form.Option key={Math.random(room)} value={room}>{room} Bedrooms</Form.Option>
+                <Form.Option key={Math.random(room)} value={room}>
+                  {room} Bedrooms
+                </Form.Option>
               ))}
             </Form.Select>
           </Form.FormGroup>
@@ -113,16 +117,17 @@ const AdvancedSearchContainer = (props) => {
             <Form.Select name="baths">
               <Form.Option defaultValue>Bath Rooms</Form.Option>
               {baths.map((room) => (
-                <Form.Option key={Math.random(room)} value={room}>{room} Bathrooms</Form.Option>
+                <Form.Option key={Math.random(room)} value={room}>
+                  {room} Bathrooms
+                </Form.Option>
               ))}
             </Form.Select>
           </Form.FormGroup>
-          
+
           <Form.FormGroup>
             <Form.Span>
               {" "}
-              Price range: ETH {priceRange} to ETH{" "}
-              {maxPrice}
+              Price range: ETH {priceRange} to ETH {maxPrice}
             </Form.Span>
             <Form.RangeInput
               type="range"
@@ -134,7 +139,11 @@ const AdvancedSearchContainer = (props) => {
             />
           </Form.FormGroup>
           <Form.FormGroup>
-            <Form.Input type="text" name="searchfield" placeholder="Search Term" />
+            <Form.Input
+              type="text"
+              name="searchfield"
+              placeholder="Search Term"
+            />
           </Form.FormGroup>
           <Form.FormGroup>
             <Form.SubmitInput type="submit" value="Search" />

@@ -15,10 +15,7 @@ const firebaseApp = !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)
   : firebase.app();
 
-const Home = ({
-  user
-}) => {
-  console.log(user)
+const Home = ({ user }) => {
   return (
     <>
       <HeaderContainer bg="true" source="/images/banners/banner-homes.jpg" />

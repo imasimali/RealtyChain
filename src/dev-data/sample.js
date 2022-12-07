@@ -6,11 +6,11 @@ const price = (price) => {
   return price.format();
 };
 
-const sample = async function(){
-  const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
-  const json = await res.json()
+const sample = async function () {
+  const res = await fetch(`/.netlify/functions/addnew`);
+  const json = await res.json();
   // console.log(json)
-  return json
+  return json;
 };
 
 // const listing = [];

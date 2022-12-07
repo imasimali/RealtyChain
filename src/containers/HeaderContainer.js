@@ -37,7 +37,25 @@ const HeaderContainer = ({ bg, source, user }) => {
         <HeaderWrapper.Container>
           <HeaderWrapper.Title bg={bg}>
             <HeaderWrapper.Link bg={bg} fixed={fixed} to="/">
-              {(bg === "true" && fixed) ? <img src="//firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-blue.png?alt=media" width="250" height="100" /> : bg === "true" ? <img src="//firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-white.png?alt=media" width="250" height="100" /> : <img src="//firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-blue.png?alt=media" width="250" height="100" />}
+              {bg === "true" && fixed ? (
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-blue.png?alt=media"
+                  width="250"
+                  height="100"
+                />
+              ) : bg === "true" ? (
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-white.png?alt=media"
+                  width="250"
+                  height="100"
+                />
+              ) : (
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-blue.png?alt=media"
+                  width="250"
+                  height="100"
+                />
+              )}
             </HeaderWrapper.Link>
           </HeaderWrapper.Title>
           <HeaderWrapper.LinksContainer>
@@ -45,7 +63,11 @@ const HeaderContainer = ({ bg, source, user }) => {
               {links.map((link) => (
                 <HeaderWrapper.Item key={link.to}>
                   <HeaderWrapper.Anchor bg={bg} fixed={fixed} to={`${link.to}`}>
-                    {!(link.name == "login") ? link.name : (user != null ? link.name = "dashboard" : link.name = "login")}
+                    {!(link.name == "login")
+                      ? link.name
+                      : user != null
+                      ? (link.name = "dashboard")
+                      : (link.name = "login")}
                   </HeaderWrapper.Anchor>
                 </HeaderWrapper.Item>
               ))}

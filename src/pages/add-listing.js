@@ -17,18 +17,16 @@ import {
   Media,
   Details,
 } from "../partials/add_property_partials";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-import Web3 from 'web3';
-import Blockyards from '../abis/Blockyards.json';
+import Web3 from "web3";
+import Blockyards from "../abis/Blockyards.json";
 
 const firebaseApp = !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)
   : firebase.app();
 
-const AddLisiting = ({
-  user
-}) => {
+const AddLisiting = ({ user }) => {
   const { id } = useParams();
   const [childData, setChildData] = useState("");
   const [newpropertyid, setNewpropertyid] = useState("");
@@ -39,65 +37,71 @@ const AddLisiting = ({
   const [loading, isLoading] = useState(true);
 
   useEffect(async () => {
-    const isweb3 = await loadWeb3()
-    isweb3 ? await loadBlockchainData() : null
+    const isweb3 = await loadWeb3();
+    isweb3 ? await loadBlockchainData() : null;
   }, []);
 
-  const loadWeb3 = async function() {
+  const loadWeb3 = async function () {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
-      await window.ethereum.enable()
-      return true
-    }
-    else if (window.web3) {
+      await window.ethereum.enable();
+      return true;
+    } else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider);
-      return true
-    }
-    else {
-      window.alert('Non-ethereum browser detected')
-      setTimeout(() => { history.push("/") }, 10);
-      return false
-    }
-  }
-
-  const loadBlockchainData = async function() {
-    const web3 = window.web3
-    const accounts = await web3.eth.getAccounts()
-    const account = accounts[0]
-    setAccount(account)
-    console.log(accounts[0])
-    // Load contract
-    const networkId = await web3.eth.net.getId()
-    const networkData = Blockyards.networks[networkId]
-    if (networkData) {
-      const BlockyardsContract = new web3.eth.Contract(Blockyards.abi, networkData.address)
-      setContract(BlockyardsContract)
-      console.log(BlockyardsContract)
+      return true;
     } else {
-      window.alert('Blockyards not deployed to connected network');
-      setTimeout(() => { history.push("/") }, 10);
+      window.alert("Non-ethereum browser detected");
+      setTimeout(() => {
+        history.push("/");
+      }, 10);
+      return false;
     }
-  }
+  };
+
+  const loadBlockchainData = async function () {
+    const web3 = window.web3;
+    const accounts = await web3.eth.getAccounts();
+    const account = accounts[0];
+    setAccount(account);
+    console.log(accounts[0]);
+    // Load contract
+    const networkId = await web3.eth.net.getId();
+    const networkData = Blockyards.networks[networkId];
+    if (networkData) {
+      const BlockyardsContract = new web3.eth.Contract(
+        Blockyards.abi,
+        networkData.address
+      );
+      setContract(BlockyardsContract);
+    } else {
+      window.alert("Blockyards not deployed to connected network");
+      setTimeout(() => {
+        history.push("/");
+      }, 10);
+    }
+  };
 
   const addLand = (_assetId, value, _metadata) => {
-    isLoading(true)
-    const _price = window.web3.utils.toWei(value.toString(), 'ether')
-    Contract.methods.listASSET(_assetId, _price, _metadata).send({ from: Account })
-      .once('receipt', (receipt) => {
-        isLoading(false)
-      })
-  }
+    isLoading(true);
+    const _price = window.web3.utils.toWei(value.toString(), "ether");
+    Contract.methods
+      .listASSET(_assetId, _price, _metadata)
+      .send({ from: Account })
+      .once("receipt", (receipt) => {
+        isLoading(false);
+      });
+  };
 
   async function handleSubmit(event) {
     const data = new FormData(event.currentTarget);
-    const price = data.get("price")
-    const meta = user.email || "none"
+    const price = data.get("price");
+    const meta = user.email || "none";
     // console.log(childData)
 
-    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`, {
-      method: 'POST',
+    const res = await fetch(`/.netlify/functions/addnew`, {
+      method: "POST",
       body: JSON.stringify({
-        email: user ?.email ? user.email : "None",
+        email: user?.email ? user.email : "None",
         waddress: Account,
         images: childData,
         category: data.get("category"),
@@ -118,20 +122,28 @@ const AddLisiting = ({
         pool: data.get("pool") == "Available" ? true : false,
         furnished: data.get("furnished") == "Available" ? true : false,
         status: data.get("status") == "Available" ? true : false,
-        amenities: data.get("amenities").split(','),
+        amenities: data.get("amenities").split(","),
       }),
-    })
-    if (Account != undefined && price != undefined && meta != undefined && !isNaN(price)) {
+    });
+    if (
+      Account != undefined &&
+      price != undefined &&
+      meta != undefined &&
+      !isNaN(price)
+    ) {
       const resulting = await res.json();
       setNewpropertyid(resulting.result);
       console.log(resulting.result);
       addLand(newpropertyid, price, meta);
       event.target.reset();
-      document.getElementById(".message").innerText = ``
-      setTimeout(() => { history.push("/property/" + resulting.result) }, 15000)
-    }
-    else {
-      document.getElementById(".message").innerText = `Request Failed - Please check input`
+      document.getElementById(".message").innerText = ``;
+      setTimeout(() => {
+        history.push("/property/" + resulting.result);
+      }, 15000);
+    } else {
+      document.getElementById(
+        ".message"
+      ).innerText = `Request Failed - Please check input`;
     }
   }
 
@@ -142,7 +154,12 @@ const AddLisiting = ({
         <Section.InnerContainer>
           <DashboardContainer title={id ? "Edit Property" : "Add Property"}>
             <Add>
-              <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }}>
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSubmit(e);
+                }}
+              >
                 <Descrition />
                 <Location />
                 <Media passChildData={setChildData} />

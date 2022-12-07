@@ -7,10 +7,14 @@ const FooterContainer = () => {
       <Footer.Container>
         <Footer.Content>
           <Footer.Item>
-            <Footer.Title><img src="//firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-white.png?alt=media" width="250" height="100" /></Footer.Title>
-            <Footer.Text>
-              FCC Road, Lahore. Punjab, Pakistan, 54000
-            </Footer.Text>
+            <Footer.Title>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-white.png?alt=media"
+                width="250"
+                height="100"
+              />
+            </Footer.Title>
+            <Footer.Text>FCC Road, Lahore. Punjab, Pakistan, 54000</Footer.Text>
             <Footer.List>
               <Footer.ListItem>
                 <Footer.Icon name="fas fa-phone-alt" social="true" />

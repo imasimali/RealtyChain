@@ -6,16 +6,16 @@ import { ListingItemContainer } from "./index";
 
 const FeaturedListingContainer = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [featuredProperties, setfeaturedProperties] = useState([])
+  const [featuredProperties, setfeaturedProperties] = useState([]);
 
-  const requestfeatured = async function() {
-    const res = await fetch(`//yardblocksdb.whizz-kid.repl.co/api/addnew`);
-    const json = await res.json()
-    return json
+  const requestfeatured = async function () {
+    const res = await fetch(`/.netlify/functions/addnew`);
+    const json = await res.json();
+    return json;
   };
 
   useEffect(async () => {
-    const res = await requestfeatured()
+    const res = await requestfeatured();
     setfeaturedProperties(res);
     setIsLoading(false);
   }, []);
@@ -31,12 +31,12 @@ const FeaturedListingContainer = () => {
         {isLoading ? (
           <h3>Loading ...</h3>
         ) : (
-            <Section.Content>
-              {featuredProperties.map((featured) => (
-                <ListingItemContainer key={featured._id} featured={featured} />
-              ))}
-            </Section.Content>
-          )}
+          <Section.Content>
+            {featuredProperties.map((featured) => (
+              <ListingItemContainer key={featured._id} featured={featured} />
+            ))}
+          </Section.Content>
+        )}
         <Section.Footer>
           <Section.Button>More Listing</Section.Button>
         </Section.Footer>
