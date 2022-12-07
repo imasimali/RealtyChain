@@ -1,5 +1,4 @@
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-const mnemonic = "f38348a9e5d1780fe7c2c9afde5b1a76299179911219b0c4a67100f8a5c74233";
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 module.exports = {
   networks: {
@@ -9,24 +8,25 @@ module.exports = {
     //   network_id: "*" // Match any network id
     // },
     sepolia: {
-      provider: () => new HDWalletProvider(mnemonic, `wss://sepolia.infura.io/ws/v3/af00b7c60037481eb11cdfdc6d99a5ba`),
-      network_id: 11155111,       // Sepolia's id
-      gas: 5500000,        // Sepolia has a lower block limit than mainnet
-      confirmations: 2,    // # of confirmations to wait between deployments. (default: 0)
-      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-      skipDryRun: true,     // Skip dry run before migrations? (default: false for public nets )
-      networkCheckTimeout: 1000000
+      provider: () =>
+        new HDWalletProvider(process.env.MNEMONIC, process.env.INFURA_API),
+      network_id: 11155111, // Sepolia's id
+      gas: 5500000, // Sepolia has a lower block limit than mainnet
+      confirmations: 2, // # of confirmations to wait between deployments. (default: 0)
+      timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+      networkCheckTimeout: 1000000,
     },
   },
-  contracts_directory: './src/contracts/',
-  contracts_build_directory: './src/abis/',
+  contracts_directory: "./src/contracts/",
+  contracts_build_directory: "./src/abis/",
   compilers: {
     solc: {
       version: "0.8.9",
       optimizer: {
         enabled: true,
-        runs: 200
-      }
-    }
-  }
-}
+        runs: 200,
+      },
+    },
+  },
+};

@@ -4,7 +4,7 @@ const firebaseConfig = {
   projectId: "emadfyp",
   storageBucket: "emadfyp.appspot.com",
   messagingSenderId: "859916353378",
-  appId: "1:859916353378:web:d7f053c3a1a1513c70f63b",
+  appId: "1:859916353378:web:a240d89898806a9570f63b",
 };
 
 export default firebaseConfig;
