@@ -16,18 +16,12 @@ import { useHistory } from "react-router-dom";
 import Web3 from "web3";
 import Blockyards from "../abis/Blockyards.json";
 
-import firebase from "firebase";
-import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "../firebaseConfig";
-
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
 const AdminAgentListing = ({ user }) => {
   const [properties, setProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
+
+  const [web3Enabled, setWeb3Enabled] = useState(false);
 
   const [Account, setAccount] = useState("");
   const [Contract, setContract] = useState("");
@@ -41,10 +35,6 @@ const AdminAgentListing = ({ user }) => {
       window.web3 = new Web3(window.web3.currentProvider);
       return true;
     } else {
-      window.alert("Non-ethereum browser detected");
-      setTimeout(() => {
-        history.push("/");
-      }, 10);
       return false;
     }
   };
@@ -64,11 +54,9 @@ const AdminAgentListing = ({ user }) => {
         networkData.address
       );
       setContract(BlockyardsContract);
+      return true;
     } else {
-      window.alert("Blockyards not deployed to connected network");
-      setTimeout(() => {
-        history.push("/");
-      }, 10);
+      return false;
     }
   };
 
@@ -87,7 +75,8 @@ const AdminAgentListing = ({ user }) => {
     console.log(filteredProperty);
     setProperties(filteredProperty);
     const isweb3 = await loadWeb3();
-    isweb3 ? await loadBlockchainData() : null;
+    const sameTestnet = isweb3 && (await loadBlockchainData());
+    setWeb3Enabled(isweb3 && sameTestnet);
     setIsLoading(false);
   }, [user]);
 
@@ -123,6 +112,12 @@ const AdminAgentListing = ({ user }) => {
   };
 
   async function handleSubmit(data) {
+    if (!web3Enabled) {
+      alert(
+        "Please connect your metamask wallet and use Sepolia test network."
+      );
+      return;
+    }
     const meta = user.email || "none";
     console.log(data);
     if (
@@ -160,8 +155,4 @@ const AdminAgentListing = ({ user }) => {
   );
 };
 
-// export default AdminAgentListing;
-
-const firebaseAppAuth = firebaseApp.auth();
-
-export default withFirebaseAuth({ firebaseAppAuth })(AdminAgentListing);
+export default AdminAgentListing;

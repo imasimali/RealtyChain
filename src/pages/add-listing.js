@@ -1,9 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import firebase from "firebase";
-import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "../firebaseConfig";
-
 import { Section, Add, Form } from "../components";
 import { useParams } from "react-router-dom";
 import {
@@ -22,15 +18,13 @@ import { useHistory } from "react-router-dom";
 import Web3 from "web3";
 import Blockyards from "../abis/Blockyards.json";
 
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
 const AddLisiting = ({ user }) => {
   const { id } = useParams();
   const [childData, setChildData] = useState("");
   const [newpropertyid, setNewpropertyid] = useState("");
   const history = useHistory();
+
+  const [web3Enabled, setWeb3Enabled] = useState(false);
 
   const [Account, setAccount] = useState("");
   const [Contract, setContract] = useState("");
@@ -38,7 +32,8 @@ const AddLisiting = ({ user }) => {
 
   useEffect(async () => {
     const isweb3 = await loadWeb3();
-    isweb3 ? await loadBlockchainData() : null;
+    const sameTestnet = isweb3 && (await loadBlockchainData());
+    setWeb3Enabled(isweb3 && sameTestnet);
   }, []);
 
   const loadWeb3 = async function () {
@@ -50,10 +45,6 @@ const AddLisiting = ({ user }) => {
       window.web3 = new Web3(window.web3.currentProvider);
       return true;
     } else {
-      window.alert("Non-ethereum browser detected");
-      setTimeout(() => {
-        history.push("/");
-      }, 10);
       return false;
     }
   };
@@ -73,11 +64,9 @@ const AddLisiting = ({ user }) => {
         networkData.address
       );
       setContract(BlockyardsContract);
+      return true;
     } else {
-      window.alert("Blockyards not deployed to connected network");
-      setTimeout(() => {
-        history.push("/");
-      }, 10);
+      return false;
     }
   };
 
@@ -93,6 +82,12 @@ const AddLisiting = ({ user }) => {
   };
 
   async function handleSubmit(event) {
+    if (!web3Enabled) {
+      alert(
+        "Please connect your metamask wallet and use Sepolia test network."
+      );
+      return;
+    }
     const data = new FormData(event.currentTarget);
     const price = data.get("price");
     const meta = user.email || "none";
@@ -188,8 +183,4 @@ const AddLisiting = ({ user }) => {
   );
 };
 
-// export default AddLisiting;
-
-const firebaseAppAuth = firebaseApp.auth();
-
-export default withFirebaseAuth({ firebaseAppAuth })(AddLisiting);
+export default AddLisiting;

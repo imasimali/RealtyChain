@@ -18,44 +18,89 @@ import {
   AgentListing,
 } from "./pages";
 
-const App = () => {
+import firebase from "firebase/app";
+import "firebase/auth";
+import withFirebaseAuth from "react-with-firebase-auth";
+import firebaseConfig from "./firebaseConfig";
+
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+const App = ({
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  user,
+  error,
+  loading,
+}) => {
+  const authGuard = {
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signOut,
+    user,
+    error,
+    loading,
+  };
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/listing" component={Listings} />
-        <Route exact path="/agent/:id" component={Agentt} />
-        <Route exact path="/property/:id" component={Listing} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/forgot-password" component={Forgot} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/profile" component={UserProfile} />
-        <Route exact path="/messages" component={Messages} />
-        <Route exact path="/change-password" component={Password} />
-        <Route path="/add-listing/:id?" component={AddLisiting} />
-        <Route exact path="/all-listing" component={AdminListingList} />
-        <Route exact path="/all-agents" component={AdminAgentsList} />
-        <Route exact path="/mylisting" component={AgentListing} />
+        <Route exact path="/" children={<Home {...authGuard} />} />
+        <Route exact path="/listing" children={<Listings {...authGuard} />} />
+        <Route exact path="/agent/:id" children={<Agentt {...authGuard} />} />
         <Route
           exact
-          path="/prediction"
-          component={() => {
-            window.location.href = "#";
-            return null;
-          }}
+          path="/property/:id"
+          children={<Listing {...authGuard} />}
+        />
+        <Route exact path="/login" children={<Login {...authGuard} />} />
+        <Route exact path="/signup" children={<Signup {...authGuard} />} />
+        <Route
+          exact
+          path="/forgot-password"
+          children={<Forgot {...authGuard} />}
         />
         <Route
           exact
-          path="/blockchain"
-          component={() => {
-            window.location.href = "#";
-            return null;
-          }}
+          path="/dashboard"
+          children={<Dashboard {...authGuard} />}
+        />
+        <Route
+          exact
+          path="/profile"
+          children={<UserProfile {...authGuard} />}
+        />
+        <Route exact path="/messages" children={<Messages {...authGuard} />} />
+        <Route
+          exact
+          path="/change-password"
+          children={<Password {...authGuard} />}
+        />
+        <Route
+          path="/add-listing/:id?"
+          children={<AddLisiting {...authGuard} />}
+        />
+        <Route
+          exact
+          path="/all-listing"
+          children={<AdminListingList {...authGuard} />}
+        />
+        <Route
+          exact
+          path="/all-agents"
+          children={<AdminAgentsList {...authGuard} />}
+        />
+        <Route
+          exact
+          path="/mylisting"
+          children={<AgentListing {...authGuard} />}
         />
       </Switch>
     </Router>
   );
 };
 
-export default App;
+const firebaseAppAuth = firebaseApp.auth();
+
+export default withFirebaseAuth({ firebaseAppAuth })(App);

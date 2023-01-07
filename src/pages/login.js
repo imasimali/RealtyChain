@@ -2,22 +2,14 @@ import React, { Fragment } from "react";
 import { useEffect, useState } from "react";
 import { HeaderContainer, FooterContainer } from "../containers";
 import { Login, Form } from "../components";
-import firebase from "firebase";
-import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "../firebaseConfig";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
-const Loginn = ({
-  user,
-  signInWithEmailAndPassword
-}) => {
+const Loginn = ({ user, signInWithEmailAndPassword }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+
+  console.log(user);
 
   useEffect(() => {
     checkUser(user);
@@ -33,12 +25,12 @@ const Loginn = ({
     }
   }
 
-  function handleSubmit(event){
+  function handleSubmit(event) {
     signInWithEmailAndPassword(email, password);
     history.push("/dashboard");
     // console.log(user)
   }
-  
+
   return (
     <Fragment>
       <HeaderContainer bg="false" />
@@ -49,14 +41,25 @@ const Loginn = ({
               <Login.Title>Login</Login.Title>
             </Login.Header>
             <Login.InnerContent>
-              <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }}>
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSubmit(e);
+                }}
+              >
                 <Form.FormGroup>
                   <Form.Label>Email</Form.Label>
-                  <Form.Input onChange={(e) => setEmail(e.target.value)} type="text" />
+                  <Form.Input
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                  />
                 </Form.FormGroup>
                 <Form.FormGroup>
                   <Form.Label>Password</Form.Label>
-                  <Form.Input onChange={(e) => setPassword(e.target.value)} type="text" />
+                  <Form.Input
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="text"
+                  />
                 </Form.FormGroup>
                 <Form.FormGroup>
                   <Form.SubmitInput type="submit" value="Login" />
@@ -82,8 +85,4 @@ const Loginn = ({
   );
 };
 
-// export default Loginn;
-
-const firebaseAppAuth = firebaseApp.auth();
-
-export default withFirebaseAuth({ firebaseAppAuth })(Loginn);
+export default Loginn;

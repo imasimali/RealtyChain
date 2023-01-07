@@ -7,14 +7,14 @@ import {
   FooterContainer,
 } from "../containers";
 
-const AgentListing = () => {
+const AgentListing = ({ user }) => {
   return (
     <>
       <HeaderContainer bg={false} />
       <Section bgColor="--bs-fade-info">
         <Section.InnerContainer>
           <DashboardContainer title="Delisted Properties">
-            <AdminAgentListing />
+            <AdminAgentListing user={user} />
           </DashboardContainer>
         </Section.InnerContainer>
       </Section>

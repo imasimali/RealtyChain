@@ -2,19 +2,9 @@ import React, { Fragment } from "react";
 import { useEffect, useState } from "react";
 import { HeaderContainer, FooterContainer } from "../containers";
 import { Signup, Form } from "../components";
-import firebase from "firebase";
-import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "../firebaseConfig";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
-const Signupp = ({
-  user,
-  createUserWithEmailAndPassword,
-}) => {
+const Signupp = ({ user, createUserWithEmailAndPassword }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -49,14 +39,25 @@ const Signupp = ({
               <Signup.Title>Signup</Signup.Title>
             </Signup.Header>
             <Signup.InnerContent>
-              <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSubmit();
+                }}
+              >
                 <Form.FormGroup>
                   <Form.Label>Email</Form.Label>
-                  <Form.Input onChange={(e) => setEmail(e.target.value)} type="text" />
+                  <Form.Input
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                  />
                 </Form.FormGroup>
                 <Form.FormGroup>
                   <Form.Label>Password</Form.Label>
-                  <Form.Input onChange={(e) => setPassword(e.target.value)} type="text" />
+                  <Form.Input
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="text"
+                  />
                 </Form.FormGroup>
                 <Form.FormGroup>
                   <Form.SubmitInput type="submit" value="Signup" />
@@ -77,8 +78,4 @@ const Signupp = ({
   );
 };
 
-// export default Signupp;
-
-const firebaseAppAuth = firebaseApp.auth();
-
-export default withFirebaseAuth({ firebaseAppAuth })(Signupp);
+export default Signupp;

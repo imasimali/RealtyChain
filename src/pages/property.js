@@ -22,20 +22,12 @@ import {
 } from "../partials/property_features_partial";
 import { useHistory } from "react-router-dom";
 
-import firebase from "firebase";
-import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "../firebaseConfig";
-
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
 import Web3 from "web3";
 import Blockyards from "../abis/Blockyards.json";
 
 const Listing = ({ user }) => {
   const { id } = useParams();
-  const history = useHistory();
+  const [web3Enabled, setWeb3Enabled] = useState(false);
   const [featuredProperties, setfeaturedProperties] = useState([]);
   const [property, setProperty] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -52,10 +44,6 @@ const Listing = ({ user }) => {
       window.web3 = new Web3(window.web3.currentProvider);
       return true;
     } else {
-      window.alert("Non-ethereum browser detected");
-      setTimeout(() => {
-        history.push("/");
-      }, 10);
       return false;
     }
   };
@@ -75,11 +63,9 @@ const Listing = ({ user }) => {
         networkData.address
       );
       setContract(BlockyardsContract);
+      return true;
     } else {
-      window.alert("Blockyards not deployed to connected network");
-      setTimeout(() => {
-        history.push("/");
-      }, 10);
+      return false;
     }
   };
 
@@ -96,7 +82,8 @@ const Listing = ({ user }) => {
     setfeaturedProperties(filteredFeatured);
     setProperty(filteredProperty[0]);
     const isweb3 = await loadWeb3();
-    isweb3 ? await loadBlockchainData() : null;
+    const sameTestnet = isweb3 && (await loadBlockchainData());
+    setWeb3Enabled(isweb3 && sameTestnet);
     // const isOwner = checkAsset(property._id)
     setIsLoading(false);
   }, [id]);
@@ -135,16 +122,24 @@ const Listing = ({ user }) => {
   };
 
   async function handleBuy(event) {
-    if (Account != undefined && property._id != undefined) {
+    if (web3Enabled && Account != undefined && property._id != undefined) {
       await buyAsset(property._id);
       // console.log(cRes)
+    } else {
+      alert(
+        "Please connect your metamask wallet and use Sepolia test network."
+      );
     }
   }
 
   async function handleDelist(event) {
-    if (Account != undefined && property._id != undefined) {
+    if (web3Enabled && Account != undefined && property._id != undefined) {
       await delistAsset(property._id);
       // console.log(cRes)
+    } else {
+      alert(
+        "Please connect your metamask wallet and use Sepolia test network."
+      );
     }
   }
 
@@ -210,8 +205,4 @@ const Listing = ({ user }) => {
   );
 };
 
-// export default Listing;
-
-const firebaseAppAuth = firebaseApp.auth();
-
-export default withFirebaseAuth({ firebaseAppAuth })(Listing);
+export default Listing;

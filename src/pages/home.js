@@ -7,13 +7,6 @@ import {
   FooterContainer,
 } from "../containers";
 import { useEffect, useState } from "react";
-import firebase from "firebase";
-import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "../firebaseConfig";
-
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
 
 const Home = ({ user }) => {
   return (
@@ -27,8 +20,4 @@ const Home = ({ user }) => {
   );
 };
 
-// export default Home;
-
-const firebaseAppAuth = firebaseApp.auth();
-
-export default withFirebaseAuth({ firebaseAppAuth })(Home);
+export default Home;
