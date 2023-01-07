@@ -8,11 +8,7 @@ const FooterContainer = () => {
         <Footer.Content>
           <Footer.Item>
             <Footer.Title>
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/emadfyp.appspot.com/o/images%2Flogo-white.png?alt=media"
-                width="250"
-                height="100"
-              />
+              <img src="/images/logo-white.png" width="250" height="100" />
             </Footer.Title>
             <Footer.Text>FCC Road, Lahore. Punjab, Pakistan, 54000</Footer.Text>
             <Footer.List>
@@ -40,10 +36,7 @@ const FooterContainer = () => {
                 <Footer.Anchor to="/listing">Properties</Footer.Anchor>
               </Footer.ListItem>
               <Footer.ListItem>
-                <Footer.Anchor to="/agents">Blockchain</Footer.Anchor>
-              </Footer.ListItem>
-              <Footer.ListItem>
-                <Footer.Anchor to="/prediction">Predictions</Footer.Anchor>
+                <Footer.Anchor to="/agents">Agents</Footer.Anchor>
               </Footer.ListItem>
               <Footer.ListItem>
                 <Footer.Anchor to="/dashboard">Account</Footer.Anchor>
