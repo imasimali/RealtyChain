@@ -1,5 +1,8 @@
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
+const infuraProjectId = "your-infura-project-id";
+const privateKey = "your-private-key";
+
 module.exports = {
   networks: {
     // development: {
@@ -7,15 +10,19 @@ module.exports = {
     //   port: 7545,
     //   network_id: "*" // Match any network id
     // },
-    sepolia: {
+    goerli: {
       provider: () =>
-        new HDWalletProvider(process.env.MNEMONIC, process.env.INFURA_API),
-      network_id: 11155111, // Sepolia's id
-      gas: 5500000, // Sepolia has a lower block limit than mainnet
-      confirmations: 2, // # of confirmations to wait between deployments. (default: 0)
-      timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
-      skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+        new HDWalletProvider({
+          privateKeys: [privateKey],
+          providerOrUrl: `https://goerli.infura.io/v3/${infuraProjectId}`,
+          numberOfAddresses: 1,
+        }),
+      network_id: 5,
+      gas: 5500000,
+      timeoutBlocks: 200,
+      skipDryRun: true,
       networkCheckTimeout: 1000000,
+      UV_THREADPOOL_SIZE: 20,
     },
   },
   contracts_directory: "./contracts/",

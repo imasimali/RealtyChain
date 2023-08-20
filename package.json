@@ -3,23 +3,16 @@
   "version": "2.0.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "@truffle/hdwallet-provider": "^2.1.2",
+    "@truffle/hdwallet-provider": "^2.1.13",
     "chart.js": "^3.4.1",
     "firebase": "^8.10.1",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.3",
     "react-dom": "^17.0.2",
-    "react-redux": "^7.2.4",
     "react-router-dom": "^5",
     "react-scripts": "4.0.3",
     "react-transition-group": "^4.4.2",
     "react-with-firebase-auth": "^1.4.1",
-    "redux": "^4.1.0",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.0",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2",
@@ -28,8 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "truffle": "npx truffle migrate --network goerli"
   },
   "browserslist": {
     "production": [

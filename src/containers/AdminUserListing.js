@@ -107,9 +107,7 @@ const AdminAgentListing = ({ user }) => {
 
   async function handleSubmit(data) {
     if (!web3Enabled) {
-      alert(
-        "Please connect your metamask wallet and use Sepolia test network."
-      );
+      alert("Please connect your metamask wallet and use Goerli test network.");
       return;
     }
     const meta = user.email || "none";

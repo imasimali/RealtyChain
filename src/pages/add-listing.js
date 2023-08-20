@@ -84,9 +84,7 @@ const AddLisiting = ({ user }) => {
 
   async function handleSubmit(event) {
     if (!web3Enabled) {
-      alert(
-        "Please connect your metamask wallet and use Sepolia test network."
-      );
+      alert("Please connect your metamask wallet and use Goerli test network.");
       return;
     }
     const data = new FormData(event.currentTarget);

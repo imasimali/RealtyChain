@@ -114,9 +114,7 @@ const Listing = ({ user }) => {
       await buyAsset(property._id);
       // console.log(cRes)
     } else {
-      alert(
-        "Please connect your metamask wallet and use Sepolia test network."
-      );
+      alert("Please connect your metamask wallet and use Goerli test network.");
     }
   }
 
@@ -125,9 +123,7 @@ const Listing = ({ user }) => {
       await delistAsset(property._id);
       // console.log(cRes)
     } else {
-      alert(
-        "Please connect your metamask wallet and use Sepolia test network."
-      );
+      alert("Please connect your metamask wallet and use Goerli test network.");
     }
   }
 
