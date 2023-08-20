@@ -10,7 +10,7 @@ const FooterContainer = () => {
             <Footer.Title>
               <img src="/images/logo-white.png" width="250" height="100" />
             </Footer.Title>
-            <Footer.Text>FCC Road, Lahore. Punjab, Pakistan, 54000</Footer.Text>
+            <Footer.Text>FCC Road, Lahore 54000, Punjab, Pakistan</Footer.Text>
             <Footer.List>
               <Footer.ListItem>
                 <Footer.Icon name="fas fa-phone-alt" social="true" />
@@ -23,26 +23,6 @@ const FooterContainer = () => {
               <Footer.ListItem>
                 <Footer.Icon name="far fa-envelope" social="true" />
                 <Footer.Text>blockyards@gmail.com</Footer.Text>
-              </Footer.ListItem>
-            </Footer.List>
-          </Footer.Item>
-          <Footer.Item>
-            <Footer.Subtitle>Quick Links</Footer.Subtitle>
-            <Footer.List>
-              <Footer.ListItem>
-                <Footer.Anchor to="/">Home</Footer.Anchor>
-              </Footer.ListItem>
-              <Footer.ListItem>
-                <Footer.Anchor to="/listing">Properties</Footer.Anchor>
-              </Footer.ListItem>
-              <Footer.ListItem>
-                <Footer.Anchor to="/agents">Agents</Footer.Anchor>
-              </Footer.ListItem>
-              <Footer.ListItem>
-                <Footer.Anchor to="/dashboard">Account</Footer.Anchor>
-              </Footer.ListItem>
-              <Footer.ListItem>
-                <Footer.Anchor to="/login">Login</Footer.Anchor>
               </Footer.ListItem>
             </Footer.List>
           </Footer.Item>

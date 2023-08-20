@@ -4,7 +4,7 @@ import { Listing } from "../components";
 
 const ListingItemContainer = ({ featured, width }) => {
   // console.log(featured)
-  
+
   return (
     <Listing width={width}>
       <Listing.Top>
@@ -37,12 +37,14 @@ const ListingItemContainer = ({ featured, width }) => {
           <Listing.AgentContainer>
             <Listing.AgentImageContainer>
               <Listing.Image
-                src={`/images/agents/default.jpg`/*${featured.agent.image}*/}
+                src={`/images/agents/default.jpg` /*${featured.agent.image}*/}
                 profile="true"
               />
             </Listing.AgentImageContainer>
             <Listing.AgentName>
-              <Listing.Anchor to={`/agents/default.jpg`/*${featured.agent.name}*/}>
+              <Listing.Anchor
+                to={`/agents/default.jpg` /*${featured.agent.name}*/}
+              >
                 {featured.owner.name}
               </Listing.Anchor>
             </Listing.AgentName>

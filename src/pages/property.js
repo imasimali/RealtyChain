@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
-// import {
-//   getProperty,
-//   getFeaturedList,
-// } from "../redux/actions/propertiesAction";
 import { Section, Property } from "../components";
 import {
   HeaderContainer,
-  ContactAgentContainer,
+  ContactOwnerContainer,
   PropertyRelatedContainer,
   FooterContainer,
 } from "../containers";
@@ -177,7 +172,7 @@ const Listing = ({ user }) => {
                   <PropertyDescription description={property.description} />
                 </Property.Left>
                 <Property.Right>
-                  <ContactAgentContainer
+                  <ContactOwnerContainer
                     handleDelist={handleDelist}
                     handleBuy={handleBuy}
                     Account={Account}

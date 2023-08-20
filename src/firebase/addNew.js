@@ -1,4 +1,4 @@
-import { firestore, auth } from "../firebaseConfig";
+import { firestore, auth } from "./firebaseConfig";
 
 export const addListingFirebase = async (data) => {
   try {

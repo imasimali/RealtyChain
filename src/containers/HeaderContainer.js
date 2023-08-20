@@ -4,7 +4,7 @@ import { HeaderWrapper, Banner, Jumbotron } from "../components";
 import firebase from "firebase/app";
 import "firebase/auth";
 import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "../firebaseConfig";
+import firebaseConfig from "../firebase/firebaseConfig";
 
 import { AdvancedSearchContainer, SideNavigationContainer } from "./index";
 

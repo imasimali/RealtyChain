@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { Add, Form } from "../components";
-import { storage } from "../firebaseConfig";
+import { storage } from "../firebase/firebaseConfig";
 
 const Descrition = () => {
   return (

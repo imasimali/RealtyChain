@@ -1,4 +1,4 @@
-import { firestore } from "../firebaseConfig";
+import { firestore } from "./firebaseConfig";
 
 export const getListingsFirebase = async () => {
   try {
