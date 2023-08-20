@@ -58,7 +58,7 @@ const Loginn = ({ user, signInWithEmailAndPassword }) => {
                   <Form.Label>Password</Form.Label>
                   <Form.Input
                     onChange={(e) => setPassword(e.target.value)}
-                    type="text"
+                    type="password"
                   />
                 </Form.FormGroup>
                 <Form.FormGroup>

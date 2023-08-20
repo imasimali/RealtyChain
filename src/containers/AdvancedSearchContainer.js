@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 // import { getPropertyList } from "../redux/actions/propertiesAction";
 
 import { FormWrapper, Form } from "../components";
+import { getListingsFirebase } from "../firebase/Listing";
 
 import { priceFormat } from "../helpers/helper_functions";
 
@@ -12,9 +13,7 @@ const AdvancedSearchContainer = (props) => {
   const [properties, setProperties] = useState([]);
 
   const requestlistings = async function () {
-    const res = await fetch(`/.netlify/functions/addnew`);
-    const json = await res.json();
-    return json;
+    return await getListingsFirebase();
   };
 
   useEffect(async () => {

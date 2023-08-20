@@ -5,14 +5,3 @@ const price = (price) => {
   };
   return price.format();
 };
-
-const sample = async function () {
-  const res = await fetch(`/.netlify/functions/addnew`);
-  const json = await res.json();
-  // console.log(json)
-  return json;
-};
-
-// const listing = [];
-
-export default sample;

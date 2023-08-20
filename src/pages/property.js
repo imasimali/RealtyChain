@@ -20,7 +20,7 @@ import {
   PropertyFeatures,
   PropertyDescription,
 } from "../partials/property_features_partial";
-import { useHistory } from "react-router-dom";
+import { getListingsFirebase } from "../firebase/Listing";
 
 import Web3 from "web3";
 import Blockyards from "../abis/Blockyards.json";
@@ -70,9 +70,7 @@ const Listing = ({ user }) => {
   };
 
   const requestlistings = async function () {
-    const res = await fetch(`/.netlify/functions/addnew`);
-    const json = await res.json();
-    return json;
+    return await getListingsFirebase();
   };
 
   useEffect(async () => {

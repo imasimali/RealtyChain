@@ -14,6 +14,7 @@ import {
   Details,
 } from "../partials/add_property_partials";
 import { useHistory } from "react-router-dom";
+import { addListingFirebase } from "../firebase/addNew";
 
 import Web3 from "web3";
 import Blockyards from "../abis/Blockyards.json";
@@ -93,47 +94,45 @@ const AddLisiting = ({ user }) => {
     const meta = user.email || "none";
     // console.log(childData)
 
-    const res = await fetch(`/.netlify/functions/addnew`, {
-      method: "POST",
-      body: JSON.stringify({
-        email: user?.email ? user.email : "None",
-        waddress: Account,
-        images: childData,
-        category: data.get("category"),
-        price: data.get("price"),
-        featured: data.get("featured") == "Yes" ? true : false,
-        date: data.get("date"),
-        description: data.get("description"),
-        location: data.get("location"),
-        city: data.get("city"),
-        state: data.get("state"),
-        latitude: data.get("latitude"),
-        longitude: data.get("longitude"),
-        beds: data.get("beds"),
-        baths: data.get("baths"),
-        areasqft: data.get("areasqft"),
-        areatext: data.get("areatext"),
-        garage: data.get("garage") == "Available" ? true : false,
-        pool: data.get("pool") == "Available" ? true : false,
-        furnished: data.get("furnished") == "Available" ? true : false,
-        status: data.get("status") == "Available" ? true : false,
-        amenities: data.get("amenities").split(","),
-      }),
-    });
+    const formData = {
+      email: user?.email ? user.email : "None",
+      waddress: Account,
+      images: childData,
+      category: data.get("category"),
+      price: data.get("price"),
+      featured: data.get("featured") == "Yes" ? true : false,
+      date: data.get("date"),
+      description: data.get("description"),
+      location: data.get("location"),
+      city: data.get("city"),
+      state: data.get("state"),
+      latitude: data.get("latitude"),
+      longitude: data.get("longitude"),
+      beds: data.get("beds"),
+      baths: data.get("baths"),
+      areasqft: data.get("areasqft"),
+      areatext: data.get("areatext"),
+      garage: data.get("garage") == "Available" ? true : false,
+      pool: data.get("pool") == "Available" ? true : false,
+      furnished: data.get("furnished") == "Available" ? true : false,
+      status: data.get("status") == "Available" ? true : false,
+      amenities: data.get("amenities").split(","),
+    };
+
+    const docId = await addListingFirebase(formData);
+
     if (
       Account != undefined &&
       price != undefined &&
       meta != undefined &&
       !isNaN(price)
     ) {
-      const resulting = await res.json();
-      setNewpropertyid(resulting.result);
-      console.log(resulting.result);
+      setNewpropertyid(docId);
       addLand(newpropertyid, price, meta);
       event.target.reset();
       document.getElementById(".message").innerText = ``;
       setTimeout(() => {
-        history.push("/property/" + resulting.result);
+        history.push("/property/" + docId);
       }, 15000);
     } else {
       document.getElementById(

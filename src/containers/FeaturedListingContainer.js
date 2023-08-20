@@ -3,15 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Section } from "../components";
 import { ListingItemContainer } from "./index";
 // import { getFeaturedList } from "../redux/actions/propertiesAction";
+import { getListingsFirebase } from "../firebase/Listing";
 
 const FeaturedListingContainer = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [featuredProperties, setfeaturedProperties] = useState([]);
 
   const requestfeatured = async function () {
-    const res = await fetch(`/.netlify/functions/addnew`);
-    const json = await res.json();
-    return json;
+    return await getListingsFirebase();
   };
 
   useEffect(async () => {

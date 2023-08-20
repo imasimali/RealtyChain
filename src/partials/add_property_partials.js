@@ -1,16 +1,7 @@
 import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { Add, Form } from "../components";
-import firebaseConfig from "../firebaseConfig";
-
-import firebase from "firebase/app";
-import "firebase/storage";
-
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
-const storage = firebaseApp.storage();
+import { storage } from "../firebaseConfig";
 
 const Descrition = () => {
   return (

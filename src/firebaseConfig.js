@@ -1,10 +1,21 @@
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+import "firebase/storage";
+
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: "emadfyp.firebaseapp.com",
-  projectId: "emadfyp",
-  storageBucket: "emadfyp.appspot.com",
-  messagingSenderId: "859916353378",
-  appId: "1:859916353378:web:a240d89898806a9570f63b",
+  apiKey: "AIzaSyBIiFk61_wkLGel1yC51jMc97o3brNU7iM",
+  authDomain: "blockyards.firebaseapp.com",
+  projectId: "blockyards",
+  storageBucket: "blockyards.appspot.com",
+  messagingSenderId: "61562330938",
+  appId: "1:61562330938:web:a0450b7ad16394222cfa03",
 };
 
-export default firebaseConfig;
+firebase.initializeApp(firebaseConfig);
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+export const storage = firebase.storage();
+
+export default firebase;

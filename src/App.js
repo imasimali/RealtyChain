@@ -18,14 +18,8 @@ import {
   AgentListing,
 } from "./pages";
 
-import firebase from "firebase/app";
-import "firebase/auth";
+import firebase, { auth, firestore } from "./firebaseConfig";
 import withFirebaseAuth from "react-with-firebase-auth";
-import firebaseConfig from "./firebaseConfig";
-
-const firebaseApp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
 
 const App = ({
   signInWithEmailAndPassword,
@@ -101,6 +95,6 @@ const App = ({
   );
 };
 
-const firebaseAppAuth = firebaseApp.auth();
+const firebaseAppAuth = firebase.auth();
 
 export default withFirebaseAuth({ firebaseAppAuth })(App);

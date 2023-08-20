@@ -6,15 +6,14 @@ import {
 } from "../containers";
 import { Section, Summary } from "../components";
 import BarGraph from "../helpers/graphs";
+import { getListingsFirebase } from "../firebase/Listing";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [properties, setProperties] = useState([]);
 
   const requestfeatured = async function () {
-    const res = await fetch(`/.netlify/functions/addnew`);
-    const json = await res.json();
-    return json;
+    return await getListingsFirebase();
   };
 
   useEffect(async () => {

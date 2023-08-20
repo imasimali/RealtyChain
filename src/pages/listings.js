@@ -8,6 +8,7 @@ import {
 } from "../containers";
 import { Section } from "../components";
 // import { getPropertyList } from "../redux/actions/propertiesAction";
+import { getListingsFirebase } from "../firebase/Listing";
 
 const Listing = () => {
   const [properties, setProperties] = useState([]);
@@ -15,9 +16,7 @@ const Listing = () => {
   const [childData, setChildData] = useState([]);
 
   const requestlistings = async function () {
-    const res = await fetch(`/.netlify/functions/addnew`);
-    const json = await res.json();
-    return json;
+    return await getListingsFirebase();
   };
 
   useEffect(async () => {
