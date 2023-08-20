@@ -10,3 +10,4 @@ export { default as DashboardContainer } from "./DashboardContainer";
 export { default as ProfileContainer } from "./ProfileContainer";
 export { default as ChangePasswordContainer } from "./ChangePasswordContainer";
 export { default as SideNavigationContainer } from "./SideNavigationContainer";
+export { default as AdminUserListing } from "./AdminUserListing";

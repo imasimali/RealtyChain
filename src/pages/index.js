@@ -8,3 +8,4 @@ export { default as Dashboard } from "./dashboard";
 export { default as UserProfile } from "./profile";
 export { default as Password } from "./change-password";
 export { default as AddLisiting } from "./add-listing";
+export { default as UserListing } from "./user-listing";

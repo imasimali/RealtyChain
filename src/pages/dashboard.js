@@ -30,7 +30,7 @@ const Dashboard = () => {
           {isLoading ? (
             <h3>Loading ...</h3>
           ) : (
-            <DashboardContainer title="Agency Summaries">
+            <DashboardContainer title="Properties Summary">
               <Summary.Top>
                 <Summary.Anchor to="" bg="var(--bs-teal)">
                   <Summary.AnchorDiv>
@@ -43,7 +43,7 @@ const Dashboard = () => {
                 </Summary.Anchor>
                 <Summary.Anchor to="" bg="var(--bs-pink)">
                   <Summary.AnchorDiv>
-                    <Summary.Title>4</Summary.Title>
+                    <Summary.Title>40+</Summary.Title>
                     <Summary.Text>All Users</Summary.Text>
                   </Summary.AnchorDiv>
                   <Summary.AnchorDiv>

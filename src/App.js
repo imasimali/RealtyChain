@@ -10,6 +10,7 @@ import {
   UserProfile,
   Password,
   AddLisiting,
+  UserListing,
 } from "./pages";
 
 import firebase from "./firebase/firebaseConfig";
@@ -66,6 +67,11 @@ const App = ({
         <Route
           path="/add-listing/:id?"
           children={<AddLisiting {...authGuard} />}
+        />
+        <Route
+          exact
+          path="/mylisting"
+          children={<UserListing {...authGuard} />}
         />
       </Switch>
     </Router>
