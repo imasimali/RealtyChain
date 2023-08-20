@@ -12,7 +12,7 @@ import {
 import { Table, AdminListing } from "../components";
 
 import { useHistory } from "react-router-dom";
-import { getListingsFirebase } from "../firebase/Listing";
+import { getListingsFirebase, relistListing } from "../firebase/Listing";
 
 import Web3 from "web3";
 import Blockyards from "../abis/Blockyards.json";
@@ -95,19 +95,14 @@ const AdminAgentListing = ({ user }) => {
   };
 
   const update = async function (data) {
-    const res = await fetch(`/.netlify/functions/relist`, {
-      method: "POST",
-      body: JSON.stringify({
-        id: data.propertyid,
-        waddress: Account,
-        price: data.price,
-        beds: data.beds,
-        baths: data.baths,
-        amenities: data.amenities.split(","),
-      }),
+    return await relistListing({
+      id: data.propertyid,
+      waddress: Account,
+      price: data.price,
+      beds: data.beds,
+      baths: data.baths,
+      amenities: data.amenities.split(","),
     });
-    const result = await res.json();
-    return result;
   };
 
   async function handleSubmit(data) {

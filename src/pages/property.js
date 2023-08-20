@@ -20,7 +20,7 @@ import {
   PropertyFeatures,
   PropertyDescription,
 } from "../partials/property_features_partial";
-import { getListingsFirebase } from "../firebase/Listing";
+import { getListingsFirebase, updateListing } from "../firebase/Listing";
 
 import Web3 from "web3";
 import Blockyards from "../abis/Blockyards.json";
@@ -107,16 +107,11 @@ const Listing = ({ user }) => {
   };
 
   const update = async function () {
-    const res = await fetch(`/.netlify/functions/update`, {
-      method: "POST",
-      body: JSON.stringify({
-        id: property._id,
-        email: user.email,
-        owner: Account,
-      }),
+    return await updateListing({
+      id: property._id,
+      email: user.email,
+      owner: Account,
     });
-    const result = await res.json();
-    return result;
   };
 
   async function handleBuy(event) {

@@ -4,7 +4,10 @@ import React, { useEffect, useState } from "react";
 // import { getPropertyList } from "../redux/actions/propertiesAction";
 
 import { FormWrapper, Form } from "../components";
-import { getListingsFirebase } from "../firebase/Listing";
+import {
+  getListingsFirebase,
+  searchListingsFirestore,
+} from "../firebase/Listing";
 
 import { priceFormat } from "../helpers/helper_functions";
 
@@ -47,21 +50,19 @@ const AdvancedSearchContainer = (props) => {
   async function handleSubmit(event) {
     const data = new FormData(event.currentTarget);
 
-    const res = await fetch(`/.netlify/functions/search`, {
-      method: "POST",
-      body: JSON.stringify({
-        type: data.get("type"),
-        location: data.get("location"),
-        area: data.get("area"),
-        beds: data.get("beds"),
-        baths: data.get("baths"),
-        searchfield: data.get("searchfield"),
-        price: priceRange,
-      }),
-    });
-    const json = await res.json();
-    json.length != 0 ? props.passChildData(json) : null;
-    console.log(json);
+    const searchData = {
+      type: data.get("type"),
+      location: data.get("location"),
+      area: data.get("area"),
+      beds: data.get("beds"),
+      baths: data.get("baths"),
+      searchfield: data.get("searchfield"),
+      price: priceRange,
+    };
+
+    const res = await searchListingsFirestore(searchData);
+    res.length != 0 ? props.passChildData(res) : null;
+    console.log(res);
   }
 
   return (
