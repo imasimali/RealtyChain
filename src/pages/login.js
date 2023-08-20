@@ -9,8 +9,6 @@ const Loginn = ({ user, signInWithEmailAndPassword }) => {
   const [password, setPassword] = useState("");
   const history = useHistory();
 
-  console.log(user);
-
   useEffect(() => {
     checkUser(user);
   }, []);
@@ -28,7 +26,6 @@ const Loginn = ({ user, signInWithEmailAndPassword }) => {
   function handleSubmit(event) {
     signInWithEmailAndPassword(email, password);
     history.push("/dashboard");
-    // console.log(user)
   }
 
   return (

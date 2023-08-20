@@ -55,7 +55,6 @@ const AddLisiting = ({ user }) => {
     const accounts = await web3.eth.getAccounts();
     const account = accounts[0];
     setAccount(account);
-    console.log(accounts[0]);
     // Load contract
     const networkId = await web3.eth.net.getId();
     const networkData = Blockyards.networks[networkId];
@@ -90,7 +89,6 @@ const AddLisiting = ({ user }) => {
     const data = new FormData(event.currentTarget);
     const price = data.get("price");
     const meta = user.email || "none";
-    // console.log(childData)
 
     const formData = {
       email: user?.email ? user.email : "None",
@@ -154,7 +152,7 @@ const AddLisiting = ({ user }) => {
               >
                 <Descrition />
                 <Location />
-                <Media passChildData={setChildData} />
+                <Media user={user} passChildData={setChildData} />
                 <Details />
                 <Add.Footer>
                   <Form.FormGroup class="form-group">

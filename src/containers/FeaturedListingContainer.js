@@ -15,11 +15,10 @@ const FeaturedListingContainer = () => {
 
   useEffect(async () => {
     const res = await requestfeatured();
-    setfeaturedProperties(res);
+    const featured = res.filter((item) => item.featured === true);
+    setfeaturedProperties(featured);
     setIsLoading(false);
   }, []);
-
-  // console.log(featuredProperties)
 
   return (
     <Section bgColor="--bs-light">

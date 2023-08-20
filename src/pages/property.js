@@ -48,7 +48,6 @@ const Listing = ({ user }) => {
     const accounts = await web3.eth.getAccounts();
     const account = accounts[0];
     setAccount(account);
-    console.log(accounts[0]);
     // Load contract
     const networkId = await web3.eth.net.getId();
     const networkData = Blockyards.networks[networkId];
@@ -86,7 +85,6 @@ const Listing = ({ user }) => {
       .buyASSET(_assetId)
       .send({ from: Account })
       .once("receipt", (receipt) => {
-        console.log(receipt);
         receipt.status ? update() : null;
       });
   };
@@ -96,7 +94,6 @@ const Listing = ({ user }) => {
       .delistASSET(_assetId)
       .send({ from: Account })
       .once("receipt", (receipt) => {
-        console.log(receipt);
         receipt.status ? update() : null;
       });
   };
@@ -112,7 +109,6 @@ const Listing = ({ user }) => {
   async function handleBuy(event) {
     if (web3Enabled && Account != undefined && property._id != undefined) {
       await buyAsset(property._id);
-      // console.log(cRes)
     } else {
       alert("Please connect your metamask wallet and use Goerli test network.");
     }
@@ -121,14 +117,10 @@ const Listing = ({ user }) => {
   async function handleDelist(event) {
     if (web3Enabled && Account != undefined && property._id != undefined) {
       await delistAsset(property._id);
-      // console.log(cRes)
     } else {
       alert("Please connect your metamask wallet and use Goerli test network.");
     }
   }
-
-  // console.log(featuredProperties)
-  // console.log(property)
 
   return (
     <div>

@@ -29,7 +29,6 @@ const Listing = () => {
     setProperties(childData);
   }, [childData]);
 
-  console.log(properties);
   return (
     <>
       <HeaderContainer bg="false" />

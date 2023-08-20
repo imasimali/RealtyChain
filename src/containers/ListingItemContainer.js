@@ -3,8 +3,6 @@ import React from "react";
 import { Listing } from "../components";
 
 const ListingItemContainer = ({ featured, width }) => {
-  // console.log(featured)
-
   return (
     <Listing width={width}>
       <Listing.Top>

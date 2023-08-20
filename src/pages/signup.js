@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { HeaderContainer, FooterContainer } from "../containers";
 import { Signup, Form } from "../components";
 import { useHistory } from "react-router-dom";
+import { createUser } from "../firebase/Profile";
 
 const Signupp = ({ user, createUserWithEmailAndPassword }) => {
   const [email, setEmail] = useState("");
@@ -23,10 +24,10 @@ const Signupp = ({ user, createUserWithEmailAndPassword }) => {
     }
   }
 
-  function handleSubmit() {
-    createUserWithEmailAndPassword(email, password);
+  async function handleSubmit() {
+    const res = await createUserWithEmailAndPassword(email, password);
+    await createUser(res.user);
     checkUser(user);
-    // console.log(user)
   }
 
   return (

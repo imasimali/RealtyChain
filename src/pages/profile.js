@@ -7,14 +7,14 @@ import {
   ProfileContainer,
 } from "../containers";
 
-const UserProfile = () => {
+const UserProfile = ({ user }) => {
   return (
     <>
       <HeaderContainer />
       <Section bgColor="--bs-fade-info">
         <Section.InnerContainer>
           <DashboardContainer title="My Account">
-            <ProfileContainer />
+            <ProfileContainer user={user} />
           </DashboardContainer>
         </Section.InnerContainer>
       </Section>

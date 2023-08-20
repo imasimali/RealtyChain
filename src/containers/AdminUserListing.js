@@ -45,7 +45,6 @@ const AdminAgentListing = ({ user }) => {
     const accounts = await web3.eth.getAccounts();
     const account = accounts[0];
     setAccount(account);
-    console.log(accounts[0]);
     // Load contract
     const networkId = await web3.eth.net.getId();
     const networkData = Blockyards.networks[networkId];
@@ -71,7 +70,6 @@ const AdminAgentListing = ({ user }) => {
       (property) =>
         property.owner.name === user?.email && property.featured === false
     );
-    console.log(filteredProperty);
     setProperties(filteredProperty);
     const isweb3 = await loadWeb3();
     const sameTestnet = isweb3 && (await loadBlockchainData());
@@ -111,7 +109,6 @@ const AdminAgentListing = ({ user }) => {
       return;
     }
     const meta = user.email || "none";
-    console.log(data);
     if (
       Account != undefined &&
       data.propertyid != undefined &&
@@ -122,8 +119,6 @@ const AdminAgentListing = ({ user }) => {
       reList(data.propertyid, data.price, meta, data);
     }
   }
-
-  // const handleDeleteAction = (id) => console.log(id);
 
   return (
     <AdminListing>

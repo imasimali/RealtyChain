@@ -62,7 +62,6 @@ const AdvancedSearchContainer = (props) => {
 
     const res = await searchListingsFirestore(searchData);
     res.length != 0 ? props.passChildData(res) : null;
-    console.log(res);
   }
 
   return (

@@ -162,7 +162,7 @@ const Media = (props) => {
     if (!file) {
       alert("Please choose a file first!");
     }
-    const storageRef = storage.ref(`/images/${file.name}`);
+    const storageRef = storage.ref(`/images/${props.user.uid}/${file.name}`);
 
     const uploadTask = storageRef.put(file);
 
