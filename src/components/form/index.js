@@ -12,6 +12,7 @@ import {
   TextArea,
   Span,
   Checkbox,
+  Password,
 } from "./styles/form";
 
 const Form = ({ children, ...restProps }) => {
@@ -31,6 +32,10 @@ Form.TextArea = ({ children, ...restProps }) => {
 };
 Form.Input = ({ children, ...restProps }) => {
   return <Input {...restProps} />;
+};
+
+Form.Password = ({ children, ...restProps }) => {
+  return <Password {...restProps} />;
 };
 
 Form.Checkbox = ({ children, ...restProps }) => {

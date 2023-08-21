@@ -26,11 +26,33 @@ export const Option = styled.option`
   padding: 16px;
 `;
 
-export const Checkbox = styled.input.attrs({ type: "checkbox" })`
-
-`;
+export const Checkbox = styled.input.attrs({ type: "checkbox" })``;
 
 export const Input = styled.input.attrs({ type: "text" })`
+  width: 100%;
+  padding: 18px 9px;
+  outline: none;
+  border-radius: 2px;
+  cursor: pointer;
+  resize: none;
+  font-size: 1rem;
+  background: white;
+  box-shadow: none;
+  border: 1px solid #edf0f9;
+  color: var(--bs-secondary);
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: grey;
+    font-family: "Mulish", sans-serif;
+  }
+  :-ms-input-placeholder {
+    color: grey;
+    font-family: "Mulish", sans-serif;
+  }
+`;
+
+export const Password = styled.input.attrs({ type: "password" })`
   width: 100%;
   padding: 18px 9px;
   outline: none;

@@ -62,8 +62,8 @@ const DashboardContainer = ({ title, children, user, signOut }) => {
           <Dashboard.LeftHeader>
             <Dashboard.Image source="default.jpg" alt="" />
             <Dashboard.Text>
-              {user != null ? user.email : "Loading"}{" "}
-              {/*<Dashboard.Span>(Admin)</Dashboard.Span>*/}
+              {user != null ? user.email : "Loading"}
+              {/* <Dashboard.Span>(Admin)</Dashboard.Span> */}
             </Dashboard.Text>
           </Dashboard.LeftHeader>
           <Dashboard.LeftContent>

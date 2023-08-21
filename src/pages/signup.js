@@ -55,9 +55,8 @@ const Signupp = ({ user, createUserWithEmailAndPassword }) => {
                 </Form.FormGroup>
                 <Form.FormGroup>
                   <Form.Label>Password</Form.Label>
-                  <Form.Input
+                  <Form.Password
                     onChange={(e) => setPassword(e.target.value)}
-                    type="text"
                   />
                 </Form.FormGroup>
                 <Form.FormGroup>

@@ -8,15 +8,15 @@ const ChangePasswordContainer = () => {
       <Form>
         <Form.FormGroup>
           <Form.Label>Old Password</Form.Label>
-          <Form.Input />
+          <Form.Password />
         </Form.FormGroup>
         <Form.FormGroup>
           <Form.Label>New Password</Form.Label>
-          <Form.Input />
+          <Form.Password />
         </Form.FormGroup>
         <Form.FormGroup>
           <Form.Label>Confirm New Password</Form.Label>
-          <Form.Input />
+          <Form.Password />
         </Form.FormGroup>
         <Form.FormGroup>
           <Form.SubmitInput value="Change Password" />
