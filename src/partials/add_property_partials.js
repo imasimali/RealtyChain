@@ -195,7 +195,7 @@ const Media = (props) => {
   return (
     <Add.Media>
       <Add.MediaHeader>
-        <Add.Title>Property Images</Add.Title>
+        <Add.Title>Property Image</Add.Title>
       </Add.MediaHeader>
       <Add.MediaContent>
         <Form.FormGroup>
@@ -208,7 +208,7 @@ const Media = (props) => {
             accept="/image/*"
             // style={{ display: "none" }}
           />
-          <Add.Button onClick={handleFileButton}>Upload Files</Add.Button>
+          <Add.Button onClick={handleFileButton}>Upload Image</Add.Button>
           <p>{percent} "% done"</p>
         </Form.FormGroup>
       </Add.MediaContent>
