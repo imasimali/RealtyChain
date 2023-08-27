@@ -4,12 +4,12 @@ import "firebase/auth";
 import "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBIiFk61_wkLGel1yC51jMc97o3brNU7iM",
-  authDomain: "blockyards.firebaseapp.com",
-  projectId: "blockyards",
-  storageBucket: "blockyards.appspot.com",
-  messagingSenderId: "61562330938",
-  appId: "1:61562330938:web:a0450b7ad16394222cfa03",
+  apiKey: "AIzaSyCwMT-dvQ4Q1nT6r5LR4UilPjlOHYJJ93U",
+  authDomain: "realty-chain.firebaseapp.com",
+  projectId: "realty-chain",
+  storageBucket: "realty-chain.appspot.com",
+  messagingSenderId: "649095744808",
+  appId: "1:649095744808:web:98c613a919562f5eded41d",
 };
 
 firebase.initializeApp(firebaseConfig);

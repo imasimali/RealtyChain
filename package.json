@@ -21,7 +21,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "truffle": "npx truffle migrate --network goerli"
+    "truffle": "npx truffle migrate --network sepolia",
+    "legacy-provider": "export SET NODE_OPTIONS=--openssl-legacy-provider"
   },
   "browserslist": {
     "production": [

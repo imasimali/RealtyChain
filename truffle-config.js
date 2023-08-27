@@ -10,14 +10,14 @@ module.exports = {
     //   port: 7545,
     //   network_id: "*" // Match any network id
     // },
-    goerli: {
+    sepolia: {
       provider: () =>
         new HDWalletProvider({
           privateKeys: [privateKey],
-          providerOrUrl: `https://goerli.infura.io/v3/${infuraProjectId}`,
+          providerOrUrl: `https://sepolia.infura.io/v3/${infuraProjectId}`,
           numberOfAddresses: 1,
         }),
-      network_id: 5,
+      network_id: 11155111,
       gas: 5500000,
       timeoutBlocks: 200,
       skipDryRun: true,
@@ -29,7 +29,7 @@ module.exports = {
   contracts_build_directory: "./src/abis/",
   compilers: {
     solc: {
-      version: "0.8.9",
+      version: "0.8.21",
       optimizer: {
         enabled: true,
         runs: 200,

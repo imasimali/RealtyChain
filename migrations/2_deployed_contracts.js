@@ -1,5 +1,5 @@
-const Blockyards = artifacts.require("Blockyards");
+const RealtyChain = artifacts.require("RealtyChain");
 
 module.exports = function (deployer) {
-  deployer.deploy(Blockyards);
+  deployer.deploy(RealtyChain);
 };

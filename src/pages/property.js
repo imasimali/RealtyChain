@@ -18,7 +18,7 @@ import {
 import { getListingsFirebase, updateListing } from "../firebase/Listing";
 
 import Web3 from "web3";
-import Blockyards from "../abis/Blockyards.json";
+import RealtyChain from "../abis/RealtyChain.json";
 
 const Listing = ({ user }) => {
   const { id } = useParams();
@@ -50,13 +50,13 @@ const Listing = ({ user }) => {
     setAccount(account);
     // Load contract
     const networkId = await web3.eth.net.getId();
-    const networkData = Blockyards.networks[networkId];
+    const networkData = RealtyChain.networks[networkId];
     if (networkData) {
-      const BlockyardsContract = new web3.eth.Contract(
-        Blockyards.abi,
+      const RealtyChainContract = new web3.eth.Contract(
+        RealtyChain.abi,
         networkData.address
       );
-      setContract(BlockyardsContract);
+      setContract(RealtyChainContract);
       return true;
     } else {
       return false;
@@ -110,7 +110,9 @@ const Listing = ({ user }) => {
     if (web3Enabled && Account != undefined && property._id != undefined) {
       await buyAsset(property._id);
     } else {
-      alert("Please connect your metamask wallet and use Goerli test network.");
+      alert(
+        "Please connect your metamask wallet and use Sepolia test network."
+      );
     }
   }
 
@@ -118,7 +120,9 @@ const Listing = ({ user }) => {
     if (web3Enabled && Account != undefined && property._id != undefined) {
       await delistAsset(property._id);
     } else {
-      alert("Please connect your metamask wallet and use Goerli test network.");
+      alert(
+        "Please connect your metamask wallet and use Sepolia test network."
+      );
     }
   }
 

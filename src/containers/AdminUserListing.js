@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 import { getListingsFirebase, relistListing } from "../firebase/Listing";
 
 import Web3 from "web3";
-import Blockyards from "../abis/Blockyards.json";
+import RealtyChain from "../abis/RealtyChain.json";
 
 const AdminAgentListing = ({ user }) => {
   const [properties, setProperties] = useState([]);
@@ -47,13 +47,13 @@ const AdminAgentListing = ({ user }) => {
     setAccount(account);
     // Load contract
     const networkId = await web3.eth.net.getId();
-    const networkData = Blockyards.networks[networkId];
+    const networkData = RealtyChain.networks[networkId];
     if (networkData) {
-      const BlockyardsContract = new web3.eth.Contract(
-        Blockyards.abi,
+      const RealtyChainContract = new web3.eth.Contract(
+        RealtyChain.abi,
         networkData.address
       );
-      setContract(BlockyardsContract);
+      setContract(RealtyChainContract);
       return true;
     } else {
       return false;
@@ -105,7 +105,9 @@ const AdminAgentListing = ({ user }) => {
 
   async function handleSubmit(data) {
     if (!web3Enabled) {
-      alert("Please connect your metamask wallet and use Goerli test network.");
+      alert(
+        "Please connect your metamask wallet and use Sepolia test network."
+      );
       return;
     }
     const meta = user.email || "none";

@@ -22,7 +22,7 @@ const FooterContainer = () => {
               </Footer.ListItem>
               <Footer.ListItem>
                 <Footer.Icon name="far fa-envelope" social="true" />
-                <Footer.Text>blockyards@gmail.com</Footer.Text>
+                <Footer.Text>hi@asimali.net</Footer.Text>
               </Footer.ListItem>
             </Footer.List>
           </Footer.Item>
@@ -76,7 +76,7 @@ const FooterContainer = () => {
       </Footer.Container>
       <Footer.Bottom>
         <Footer.Container>
-          <Footer.Text>&copy; Blockyards. All Rights Reserved</Footer.Text>
+          <Footer.Text>&copy; RealtyChain. All Rights Reserved</Footer.Text>
         </Footer.Container>
       </Footer.Bottom>
     </Footer>
