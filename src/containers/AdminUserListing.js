@@ -81,7 +81,7 @@ const AdminAgentListing = ({ user }) => {
     setIsLoading(true);
     const _price = window.web3.utils.toWei(value.toString(), "ether");
     Contract.methods
-      .listASSET(_assetId, _price, _metadata)
+      .listAsset(_assetId, _price, _metadata)
       .send({ from: Account })
       .once("receipt", (receipt) => {
         receipt.status ? update(data) : null;

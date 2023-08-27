@@ -74,7 +74,7 @@ const AddLisiting = ({ user }) => {
     isLoading(true);
     const _price = window.web3.utils.toWei(value.toString(), "ether");
     Contract.methods
-      .listASSET(_assetId, _price, _metadata)
+      .listAsset(_assetId, _price, _metadata)
       .send({ from: Account })
       .once("receipt", (receipt) => {
         isLoading(false);
@@ -83,7 +83,9 @@ const AddLisiting = ({ user }) => {
 
   async function handleSubmit(event) {
     if (!web3Enabled) {
-      alert("Please connect your metamask wallet and use Sepolia test network.");
+      alert(
+        "Please connect your metamask wallet and use Sepolia test network."
+      );
       return;
     }
     const data = new FormData(event.currentTarget);

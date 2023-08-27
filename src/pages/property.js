@@ -82,7 +82,7 @@ const Listing = ({ user }) => {
 
   const buyAsset = async (_assetId) => {
     Contract.methods
-      .buyASSET(_assetId)
+      .buyAsset(_assetId)
       .send({ from: Account })
       .once("receipt", (receipt) => {
         receipt.status ? update() : null;
@@ -91,7 +91,7 @@ const Listing = ({ user }) => {
 
   const delistAsset = async (_assetId) => {
     Contract.methods
-      .delistASSET(_assetId)
+      .delistAsset(_assetId)
       .send({ from: Account })
       .once("receipt", (receipt) => {
         receipt.status ? update() : null;
