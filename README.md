@@ -12,8 +12,21 @@ RealtyChain solves such limitations by putting every detail regarding the proper
 
 ## Listing Page
 
-![RealtyChain-Delisted-Property](https://user-images.githubusercontent.com/23296316/206911047-9acdac63-be30-4fd5-9e8b-3ce4cb8e4d28.png)
+![Property-Page-RealtyChain](https://github.com/imasimali/RealtyChain/assets/23296316/4a27bb1e-59b3-41d5-bcc8-6581c5e73f63)
 
 ## Home Page
 
-![RealtyChain-Home](https://user-images.githubusercontent.com/23296316/206911069-7c13dd00-78b5-4cb7-a74e-b995c302bf6f.png)
+![Homepage-RealtyChain](https://github.com/imasimali/RealtyChain/assets/23296316/b160317d-f5e1-4315-87c1-51f941f31e24)
+
+## Profile Page
+
+![Profile-Page-RealtyChain](https://github.com/imasimali/RealtyChain/assets/23296316/74527cbe-3cde-4eb4-a5cd-3325b8d56b2a)
+
+## Dashboard Page
+
+![Dashboard-Page-RealtyChain](https://github.com/imasimali/RealtyChain/assets/23296316/92231839-6e60-4b53-8655-a1ea51cc5a3d)
+
+## Add Property Page
+
+![AddProperty-Page-RealtyChain](https://github.com/imasimali/RealtyChain/assets/23296316/af9d107c-ed86-40a2-a8ee-fcdd9a1a07c3)
+
